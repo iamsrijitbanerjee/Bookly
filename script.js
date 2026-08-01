@@ -1,126 +1,97 @@
-// Handle header styling on scroll
-window.onscroll = () => {
-    let searchForm = document.querySelector('.search-form');
-    if(searchForm) searchForm.classList.remove('active');
-  
-    if(window.scrollY > 80){
-      document.querySelector('.header .header-2').classList.add('active');
-    }else{
-      document.querySelector('.header .header-2').classList.remove('active');
+// Loader Logic
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.querySelector('.loader-container').classList.add('hidden');
+    }, 1500); // 1.5s delay to appreciate the flipping book
+});
+
+// Dark Mode Toggle
+const themeBtn = document.getElementById('theme-toggle');
+if(themeBtn) {
+    // Check local storage for theme preference
+    if(localStorage.getItem('booklyTheme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeBtn.classList.replace('fa-moon', 'fa-sun');
     }
-}
-  
-window.onload = () => {
-    if(window.scrollY > 80){
-        document.querySelector('.header .header-2').classList.add('active');
-    }else{
-        document.querySelector('.header .header-2').classList.remove('active');
-    }
-    fadeOut();
-}
-  
-function loader(){
-    document.querySelector('.loader-container').classList.add('active');
-}
-  
-function fadeOut(){
-    setTimeout(loader, 2000); // reduced from 4000 for better UX
-}
 
-// Mobile Search Toggle
-let searchBtn = document.querySelector('#search-btn');
-let searchForm = document.querySelector('.search-form');
-
-if (searchBtn && searchForm) {
-    searchBtn.onclick = () => {
-        searchForm.classList.toggle('active');
-    }
-}
-
-// --- NEW FEATURE: Search Filter ---
-const searchBox = document.querySelector('#search-box');
-const bookItems = document.querySelectorAll('.book-item');
-
-if (searchBox) {
-    searchBox.addEventListener('keyup', (e) => {
-        const searchString = e.target.value.toLowerCase();
-        
-        bookItems.forEach(book => {
-            const title = book.querySelector('.book-title').textContent.toLowerCase();
-            if(title.includes(searchString)){
-                book.style.display = "block";
-            } else {
-                book.style.display = "none";
-            }
-        });
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        if(document.body.classList.contains('dark-mode')) {
+            themeBtn.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('booklyTheme', 'dark');
+        } else {
+            themeBtn.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('booklyTheme', 'light');
+        }
     });
 }
 
-// --- NEW FEATURE: Heart / Favorite Toggle ---
+// Favorites Logic (LocalStorage)
 const favButtons = document.querySelectorAll('.fav-btn');
+let favorites = JSON.parse(localStorage.getItem('booklyFavs')) || [];
+
+// Update hearts on page load based on saved favs
 favButtons.forEach(btn => {
+    const bookId = btn.getAttribute('data-id');
+    if (favorites.includes(bookId)) {
+        btn.classList.add('active');
+        btn.classList.replace('far', 'fas'); // Solid heart
+    }
+
+    // Toggle favorite on click
     btn.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent page jump
-        // Toggle FontAwesome classes between solid (fas) and outline (far)
-        if (btn.classList.contains('fas')) {
-            btn.classList.remove('fas');
-            btn.classList.add('far');
-            btn.style.color = 'var(--black)'; // Unliked state
+        e.preventDefault();
+        const id = btn.getAttribute('data-id');
+        
+        if (favorites.includes(id)) {
+            // Remove from favs
+            favorites = favorites.filter(fav => fav !== id);
+            btn.classList.remove('active');
+            btn.classList.replace('fas', 'far');
         } else {
-            btn.classList.remove('far');
-            btn.classList.add('fas');
-            btn.style.color = '#e74c3c'; // Red for liked
+            // Add to favs
+            favorites.push(id);
+            btn.classList.add('active');
+            btn.classList.replace('far', 'fas');
+        }
+        localStorage.setItem('booklyFavs', JSON.stringify(favorites));
+        
+        // If we are on the library page, refresh the UI
+        if(window.location.pathname.includes('library.html')) {
+            renderFavorites();
         }
     });
 });
-  
-// Swiper Initializations
-var swiper = new Swiper(".books-slider", {
-    loop:true,
-    centeredSlides: true,
-    autoplay: {
-      delay: 9500,
-      disableOnInteraction: false,
-    },
-    breakpoints: {
-      0: { slidesPerView: 1, },
-      768: { slidesPerView: 2, },
-      1024: { slidesPerView: 3, },
-    },
-});
-  
-var swiperFeatured = new Swiper(".featured-slider", {
-    spaceBetween: 10,
-    loop:true,
-    centeredSlides: true,
-    autoplay: {
-      delay: 9500,
-      disableOnInteraction: false,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      0: { slidesPerView: 1, },
-      450: { slidesPerView: 2, },
-      768: { slidesPerView: 3, },
-      1024: { slidesPerView: 4, },
-    },
-});
-  
-var swiperReviews = new Swiper(".reviews-slider", {
-    spaceBetween: 10,
-    grabCursor:true,
-    loop:true,
-    centeredSlides: true,
-    autoplay: {
-      delay: 9500,
-      disableOnInteraction: false,
-    },
-    breakpoints: {
-      0: { slidesPerView: 1, },
-      768: { slidesPerView: 2, },
-      1024: { slidesPerView: 3, },
-    },
-});
+
+// Render Favorites purely on the Library page
+function renderFavorites() {
+    const favContainer = document.getElementById('favorites-container');
+    if(!favContainer) return;
+
+    const allBooks = document.querySelectorAll('.all-books .book-card');
+    favContainer.innerHTML = ''; // Clear current
+    let hasFavs = false;
+
+    allBooks.forEach(book => {
+        const id = book.querySelector('.fav-btn').getAttribute('data-id');
+        if(favorites.includes(id)) {
+            hasFavs = true;
+            // Clone the book card for the favorites section
+            let clone = book.cloneNode(true);
+            // Re-attach listener to the cloned button
+            clone.querySelector('.fav-btn').addEventListener('click', () => {
+                book.querySelector('.fav-btn').click(); // trigger original
+            });
+            favContainer.appendChild(clone);
+        }
+    });
+
+    if(!hasFavs) {
+        favContainer.innerHTML = '<p style="font-size:1.6rem; color:var(--text-light);">You have not favorited any books yet. Click the heart icon to add them here!</p>';
+    }
+}
+
+// Call on load if library page
+if(document.getElementById('favorites-container')) {
+    renderFavorites();
+}

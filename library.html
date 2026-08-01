@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookly | Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="loader-container"><div class="flipping-book"></div></div>
+
+    <header class="header">
+        <div class="header-1">
+            <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
+            <div class="icons">
+                <i class="fas fa-moon" id="theme-toggle"></i>
+            </div>
+        </div>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="library.html" class="active">Library</a>
+            <a href="explore.html">Explore</a>
+            <a href="support.html">Support</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="favorites" style="background: var(--card-bg);">
+            <h2 class="heading"><span>My Favorites</span></h2>
+            <div class="book-grid" id="favorites-container">
+                </div>
+        </section>
+
+        <section class="all-books">
+            <h2 class="heading"><span>Complete Collection</span></h2>
+            <div class="book-grid">
+                
+                <div class="book-card">
+                    <i class="far fa-heart fav-btn" data-id="book-01"></i>
+                    <img src="https://placehold.co/200x300/eee/333?text=Math+11" alt="Math">
+                    <h3>NCERT 11 Mathematics</h3>
+                    <a href="#" class="btn" download>Download</a>
+                </div>
+                
+                <div class="book-card">
+                    <i class="far fa-heart fav-btn" data-id="book-02"></i>
+                    <img src="https://placehold.co/200x300/eee/333?text=Physics+11" alt="Physics">
+                    <h3>NCERT 11 Physics 1</h3>
+                    <a href="#" class="btn" download>Download</a>
+                </div>
+
+                <div class="book-card">
+                    <i class="far fa-heart fav-btn" data-id="book-03"></i>
+                    <img src="https://placehold.co/200x300/eee/333?text=Chem+11" alt="Chemistry">
+                    <h3>NCERT 11 Chemistry 1</h3>
+                    <a href="#" class="btn" download>Download</a>
+                </div>
+
+                <div class="book-card">
+                    <i class="far fa-heart fav-btn" data-id="book-04"></i>
+                    <img src="https://placehold.co/200x300/eee/333?text=English+11" alt="English">
+                    <h3>NCERT 11 Hornbill</h3>
+                    <a href="#" class="btn" download>Download</a>
+                </div>
+                
+                </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="credit">Created by Srijit Banerjee | All Rights Reserved</div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

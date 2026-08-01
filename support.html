@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookly | Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="loader-container"><div class="flipping-book"></div></div>
+
+    <header class="header">
+        <div class="header-1">
+            <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
+            <div class="icons">
+                <i class="fas fa-moon" id="theme-toggle"></i>
+            </div>
+        </div>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="library.html">Library</a>
+            <a href="explore.html">Explore</a>
+            <a href="support.html" class="active">Support</a>
+        </nav>
+    </header>
+
+    <main>
+        <section style="display: flex; flex-wrap: wrap; gap: 3rem;">
+            
+            <div style="flex: 1 1 40rem; background: var(--card-bg); padding: 4rem; border-radius: 1rem; border: var(--border);">
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Get in Touch</h2>
+                <form action="mailto:thisissrijitbanerjee@gmail.com" method="POST">
+                    <input type="text" placeholder="Your Name" required style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); font-size: 1.5rem;">
+                    <input type="email" placeholder="Your Email" required style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); font-size: 1.5rem;">
+                    <textarea placeholder="How can we help? Request a book here..." rows="5" required style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); font-size: 1.5rem;"></textarea>
+                    <input type="submit" value="Send Message" class="btn" style="width: 100%;">
+                </form>
+            </div>
+
+            <div style="flex: 1 1 40rem;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Our Headquarters</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117925.33439927702!2d87.234398!3d23.547146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7710b42a8b98b%3A0x6bd34a3625fb18b!2sDurgapur%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" 
+                width="100%" height="400" style="border:0; border-radius: 1rem;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="credit">Created by Srijit Banerjee | All Rights Reserved</div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

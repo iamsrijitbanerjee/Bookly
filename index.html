@@ -2,247 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookly - Free Textbooks</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <title>Bookly | Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-<header class="header">
-    <div class="header-1">
-        <a href="#" class="logo"> <i class="fas fa-book"></i> bookly </a>
 
-        <form action="" class="search-form">
-            <input type="search" name="" placeholder="search by book title..." id="search-box">
-            <label for="search-box" class="fas fa-search"></label>
-        </form>
-
-        <div class="icons">
-            <div id="search-btn" class="fas fa-search"></div>
-            <a href="#favorites" class="fas fa-heart" id="header-heart"></a>
-        </div>
+    <div class="loader-container">
+        <div class="flipping-book"></div>
     </div>
 
-    <div class="header-2">
+    <header class="header">
+        <div class="header-1">
+            <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
+            <form action="" class="search-form">
+                <input type="search" placeholder="Search featured books..." id="search-box">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+            <div class="icons">
+                <i class="fas fa-moon" id="theme-toggle"></i>
+                <a href="library.html#favorites"><i class="fas fa-heart"></i></a>
+            </div>
+        </div>
         <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#featured">Featured</a>
-            <a href="#arrivals">Arrivals</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#contact">Contact</a>
+            <a href="index.html" class="active">Home</a>
+            <a href="library.html">Library</a>
+            <a href="explore.html">Explore</a>
+            <a href="support.html">Support</a>
         </nav>
-    </div>
-</header>
-<nav class="bottom-navbar">
-    <a href="#home" class="fas fa-home"></a>
-    <a href="#featured" class="fas fa-list"></a>
-    <a href="#arrivals" class="fas fa-tags"></a>
-    <a href="#reviews" class="fas fa-comments"></a>
-    <a href="#contact" class="fas fa-headset"></a>
-</nav>
+    </header>
 
-<section class="home" id="home">
-    <div class="row">
-        <div class="content">
-            <h3>17 books free of cost</h3>
-            <p>Presenting you 17 books which are absolutely free but will touch your soul 17*∞ times. Start your learning journey today.</p>
-            <a href="#arrivals" class="btn">Dive in</a>
-        </div>
+    <main>
+        <section class="home" style="text-align: center; padding: 10rem 9%;">
+            <h1 style="font-size: 5rem; margin-bottom: 2rem;">17 Books, Infinite Knowledge.</h1>
+            <p style="font-size: 1.6rem; color: var(--text-light); margin-bottom: 3rem;">Presenting free textbooks that will touch your soul 17*∞ times. Read, learn, and grow without spending a dime.</p>
+            <a href="library.html" class="btn">Explore the Library</a>
+        </section>
 
-        <div class="swiper books-slider">
-            <div class="swiper-wrapper">
-                <a href="#" class="swiper-slide"><img src="https://placehold.co/150x220/27ae60/white?text=Book+1" alt=""></a>
-                <a href="#" class="swiper-slide"><img src="https://placehold.co/150x220/27ae60/white?text=Book+2" alt=""></a>
-                <a href="#" class="swiper-slide"><img src="https://placehold.co/150x220/27ae60/white?text=Book+3" alt=""></a>
-            </div>
-            </div>
-    </div>
-</section>
-
-<section class="icons-container">
-    <div class="icons">
-        <i class="fas fa-shipping-fast"></i>
-        <div class="content">
-            <h3>Fast Downloads</h3>
-            <p>Optimized file sizes</p>
-        </div>
-    </div>
-    <div class="icons">
-        <i class="fas fa-lock"></i>
-        <div class="content">
-            <h3>Secure & Safe</h3>
-            <p>No malware or ads</p>
-        </div>
-    </div>
-    <div class="icons">
-        <i class="fas fa-redo-alt"></i>
-        <div class="content">
-            <h3>Always Free</h3>
-            <p>Zero hidden costs</p>
-        </div>
-    </div>
-    <div class="icons">
-        <i class="fas fa-headset"></i>
-        <div class="content">
-            <h3>24/7 Support</h3>
-            <p>We are here to help</p>
-        </div>
-    </div>
-</section>
-
-<section class="featured" id="featured">
-    <h1 class="heading"> <span>Featured Books</span> </h1>
-    <div class="swiper featured-slider">
-        <div class="swiper-wrapper" id="book-container">
-
-            <div class="swiper-slide box book-item">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart fav-btn"></a>
-                    <a href="#" class="fas fa-eye"></a>
+        <section>
+            <h2 class="heading"><span>Trending This Week</span></h2>
+            <div class="book-grid">
+                <div class="book-card">
+                    <i class="far fa-heart fav-btn" data-id="book-01"></i>
+                    <img src="https://placehold.co/200x300/27ae60/white?text=Math+11" alt="Math 11">
+                    <h3>NCERT 11 Mathematics</h3>
+                    <a href="#" class="btn" download>Download</a>
                 </div>
-                <div class="image">
-                    <img src="https://placehold.co/150x220/eee/333?text=Math+11" alt="Math Book">
+                <div class="book-card">
+                    <i class="far fa-heart fav-btn" data-id="book-02"></i>
+                    <img src="https://placehold.co/200x300/27ae60/white?text=Physics+11" alt="Physics 11">
+                    <h3>NCERT 11 Physics</h3>
+                    <a href="#" class="btn" download>Download</a>
                 </div>
-                <div class="content">
-                    <h3 class="book-title">NCERT 11 Mathematics</h3>
-                    <div class="price">Free <span>$20.99</span></div>
-                    <a href="https://drive.google.com/file/d/dummy/view" class="btn" download>Download</a>
-                </div>
-            </div>
-
-            <div class="swiper-slide box book-item">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart fav-btn"></a>
-                    <a href="#" class="fas fa-eye"></a>
-                </div>
-                <div class="image">
-                    <img src="https://placehold.co/150x220/eee/333?text=Physics+11" alt="Physics Book">
-                </div>
-                <div class="content">
-                    <h3 class="book-title">NCERT 11 Physics</h3>
-                    <div class="price">Free <span>$20.99</span></div>
+                <div class="book-card">
+                    <i class="far fa-heart fav-btn" data-id="book-03"></i>
+                    <img src="https://placehold.co/200x300/27ae60/white?text=Chemistry+11" alt="Chemistry 11">
+                    <h3>NCERT 11 Chemistry</h3>
                     <a href="#" class="btn" download>Download</a>
                 </div>
             </div>
+        </section>
 
-            <div class="swiper-slide box book-item">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart fav-btn"></a>
-                    <a href="#" class="fas fa-eye"></a>
-                </div>
-                <div class="image">
-                    <img src="https://placehold.co/150x220/eee/333?text=Chemistry+11" alt="Chemistry Book">
-                </div>
-                <div class="content">
-                    <h3 class="book-title">NCERT 11 Chemistry</h3>
-                    <div class="price">Free <span>$20.99</span></div>
-                    <a href="#" class="btn" download>Download</a>
-                </div>
+        <section class="newsletter">
+            <h3>Get Notified About New Books</h3>
+            <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 2rem;">Join our mailing list to receive updates when new study materials drop.</p>
+            <form action="#">
+                <input type="email" placeholder="Enter your student email..." required>
+                <input type="submit" value="Subscribe">
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Bookly</h3>
+                <p style="font-size: 1.4rem; color: var(--text-light);">Providing high-quality educational materials to students worldwide, completely free of charge.</p>
             </div>
-            
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="library.html">Library</a>
+                <a href="explore.html">Explore</a>
             </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-</section>
-
-<section class="deal">
-    <div class="content">
-        <h3>Book of the Month</h3>
-        <h1>Everyone Brave is Forgiven</h1>
-        <p>A beautiful book depicting immense courage and bravery which acts as a commendable inspiration for all students.</p>
-        <a href="#" class="btn">Download Now</a>
-    </div>
-    <div class="image">
-        <img src="https://placehold.co/400x300/27ae60/white?text=Featured+Book" alt="">
-    </div>
-</section>
-
-<section class="reviews" id="reviews">
-    <h1 class="heading"> <span>Student Reviews</span> </h1>
-    <div class="swiper reviews-slider">
-        <div class="swiper-wrapper">
-
-            <div class="swiper-slide box">
-                <img src="https://placehold.co/70x70/333/fff?text=S" alt="">
-                <h3>Sarah Jenkins</h3>
-                <p>"Bookly has been a lifesaver for my board exams. Having all the NCERT books in one place saved me so much time!"</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
+            <div class="box">
+                <h3>Contact</h3>
+                <a href="mailto:thisissrijitbanerjee@gmail.com"><i class="fas fa-envelope"></i> Email Support</a>
+                <a href="support.html"><i class="fas fa-headset"></i> Help Center</a>
             </div>
-
-            <div class="swiper-slide box">
-                <img src="https://placehold.co/70x70/333/fff?text=R" alt="">
-                <h3>Rahul Sharma</h3>
-                <p>"An amazing initiative. The downloads are fast, and the interface is super easy to use on my phone."</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="https://placehold.co/70x70/333/fff?text=A" alt="">
-                <h3>Aisha Khan</h3>
-                <p>"I couldn't afford all these textbooks right away, and this site gave me exactly what I needed to keep studying. Thank you!"</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
+        <div class="credit">Created by Srijit Banerjee | All Rights Reserved</div>
+    </footer>
 
-<section class="newsletter contact" id="contact">
-    <form action="mailto:thisissrijitbanerjee@gmail.com" method="post" enctype="text/plain">
-        <h3>Contact Support / Request a Book</h3>
-        <input type="text" name="Name" placeholder="Your Name" class="box" required>
-        <input type="email" name="Email" placeholder="Your Email" class="box" required>
-        <textarea name="Message" placeholder="How can we help you?" class="box" cols="30" rows="5" required></textarea>
-        <input type="submit" value="Send Message" class="btn">
-    </form>
-</section>
-
-<section class="footer">
-    <div class="box-container">
-        <div class="box">
-            <h3>Our Locations</h3>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> India </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> Durgapur </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> Kolkata </a>
-        </div>
-        <div class="box">
-            <h3>Quick Links</h3>
-            <a href="#home"> <i class="fas fa-arrow-right"></i> Home </a>
-            <a href="#featured"> <i class="fas fa-arrow-right"></i> Books </a>
-            <a href="#reviews"> <i class="fas fa-arrow-right"></i> Reviews </a>
-            <a href="#contact"> <i class="fas fa-arrow-right"></i> Contact </a>
-        </div>
-        <div class="box">
-            <h3>Contact Info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +91 891-875-9546 </a>
-            <a href="#"> <i class="fas fa-envelope"></i> thisissrijitbanerjee@gmail.com</a>
-        </div>
-    </div>
-    <div class="share">
-        <a href="#" class="fab fa-facebook-f"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-instagram"></a>
-        <a href="#" class="fab fa-discord"></a>
-    </div>
-    <div class="credit"> created by <span>Mr. Srijit Banerjee</span> | all rights reserved! </div>
-</section>
-
-<div class="loader-container">
-    <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading...">
-</div>
-
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
