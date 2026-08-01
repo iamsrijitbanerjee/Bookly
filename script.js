@@ -36,7 +36,7 @@ if (libraryContainer) {
 }
 
 function renderLibrary(booksData) {
-    libraryContainer.innerHTML = ''; // Clear container
+    libraryContainer.innerHTML = ''; 
 
     booksData.forEach(book => {
         const bookCard = document.createElement('div');
@@ -45,14 +45,55 @@ function renderLibrary(booksData) {
 
         bookCard.innerHTML = `
             <i class="far fa-heart fav-btn" data-id="${book.id}"></i>
-            <img src="${book.img}" alt="${book.title}">
+            <img src="${book.img}" alt="${book.title}" class="card-cover">
             <h3>${book.title}</h3>
-            <a href="${book.downloadLink}" class="btn" download>Download</a>
+            <button class="btn view-details-btn">View Book</button>
         `;
         libraryContainer.appendChild(bookCard);
+
+        // Add event listener to open the modal for this specific book
+        const viewBtn = bookCard.querySelector('.view-details-btn');
+        viewBtn.addEventListener('click', () => openModal(book));
     });
 
-    attachFavoriteListeners(); // Re-attach listeners to new DOM elements
+    attachFavoriteListeners(); 
+}
+
+// --- Modal & PDF Reader Logic ---
+const modal = document.getElementById('book-modal');
+const closeModalBtn = document.getElementById('close-modal');
+
+function openModal(book) {
+    if(!modal) return;
+    
+    // Populate the modal with the selected book's JSON data
+    document.getElementById('modal-img').src = book.img;
+    document.getElementById('modal-title').textContent = book.title;
+    document.getElementById('modal-author').textContent = book.author || "Unknown";
+    document.getElementById('modal-pages').textContent = book.pages || "N/A";
+    document.getElementById('modal-desc').textContent = book.description || "No description available.";
+    
+    // Set up the Read and Download links
+    document.getElementById('modal-read-btn').href = book.fileLink;
+    document.getElementById('modal-download-btn').href = book.fileLink;
+
+    // Show the modal
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+// Close Modal Functions
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+}
+// Close when clicking outside the white box
+window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+});
+
+function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Restore background scrolling
 }
 
 function setupFilters(allBooks) {

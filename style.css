@@ -111,3 +111,22 @@ body.dark-mode .spotlight { background: radial-gradient(ellipse at top, rgba(255
 .book-loader .page:nth-child(4) { animation-delay: 0.4s; }
 .book-loader .page:nth-child(5) { animation-delay: 0.6s; }
 @keyframes shuffle { 0% { transform: rotateY(0deg); z-index: 10; } 100% { transform: rotateY(-180deg); z-index: 1; } }
+/* --- Book Modal UI --- */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 1; transition: opacity 0.3s ease; backdrop-filter: blur(5px); }
+.modal-overlay.hidden { opacity: 0; pointer-events: none; }
+.modal-content { background: var(--card-bg); border-radius: 1.5rem; width: 90%; max-width: 800px; position: relative; padding: 4rem; transform: translateY(0); transition: transform 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.modal-overlay.hidden .modal-content { transform: translateY(30px); }
+
+.close-btn { position: absolute; top: 1.5rem; right: 2.5rem; font-size: 3.5rem; color: var(--text-light); cursor: pointer; transition: 0.2s; }
+.close-btn:hover { color: #e74c3c; transform: scale(1.1); }
+
+.modal-body { display: flex; gap: 4rem; align-items: flex-start; flex-wrap: wrap; }
+.modal-body img { width: 250px; border-radius: 1rem; box-shadow: var(--shadow); }
+.modal-info { flex: 1; min-width: 300px; }
+.modal-info h2 { font-size: 3rem; color: var(--text-main); margin-bottom: 0.5rem; }
+.modal-info .author-line { font-size: 1.4rem; color: var(--green); font-weight: 500; margin-bottom: 2rem; }
+.modal-info .description { font-size: 1.5rem; color: var(--text-light); line-height: 1.8; margin-bottom: 3rem; }
+
+.modal-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.btn.outline { background: transparent; border: 2px solid var(--green); color: var(--green); }
+.btn.outline:hover { background: var(--green); color: #fff; }

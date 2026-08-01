@@ -2,29 +2,21 @@
     {
         "id": "book-01",
         "title": "NCERT 11 Mathematics",
+        "author": "NCERT Board",
+        "pages": 412,
         "category": "math",
         "img": "https://placehold.co/200x300/eee/333?text=Math+11",
-        "downloadLink": "#"
+        "description": "A comprehensive guide to Class 11 Mathematics, covering sets, relations, functions, algebra, and calculus. Essential for board exams and competitive prep.",
+        "fileLink": "path/to/your/actual-book.pdf"
     },
     {
         "id": "book-02",
         "title": "NCERT 11 Physics",
+        "author": "NCERT Board",
+        "pages": 350,
         "category": "science",
         "img": "https://placehold.co/200x300/eee/333?text=Physics+11",
-        "downloadLink": "#"
-    },
-    {
-        "id": "book-03",
-        "title": "NCERT 11 Chemistry",
-        "category": "science",
-        "img": "https://placehold.co/200x300/eee/333?text=Chem+11",
-        "downloadLink": "#"
-    },
-    {
-        "id": "book-04",
-        "title": "NCERT 11 Hornbill",
-        "category": "english",
-        "img": "https://placehold.co/200x300/eee/333?text=Hornbill",
-        "downloadLink": "#"
+        "description": "Dive into the physical world, kinematics, laws of motion, and thermodynamics. This text builds the foundational concepts required for advanced physics.",
+        "fileLink": "path/to/your/actual-book.pdf"
     }
 ]

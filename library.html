@@ -28,6 +28,24 @@
         </nav>
     </header>
 
+    <div id="book-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Book Cover">
+                <div class="modal-info">
+                    <h2 id="modal-title">Book Title</h2>
+                    <p class="author-line">By <span id="modal-author"></span> &bull; <span id="modal-pages"></span> Pages</p>
+                    <p id="modal-desc" class="description"></p>
+                    <div class="modal-actions">
+                        <a href="#" id="modal-read-btn" class="btn" target="_blank"><i class="fas fa-book-reader"></i> Read Online</a>
+                        <a href="#" id="modal-download-btn" class="btn outline" download><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <main>
         <section id="favorites" style="background: var(--card-bg);">
             <h2 class="heading"><span>My Favorites</span></h2>
