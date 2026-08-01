@@ -6,8 +6,8 @@
         "pages": 412,
         "category": "math",
         "img": "https://placehold.co/200x300/eee/333?text=Math+11",
-        "description": "A comprehensive guide to Class 11 Mathematics, covering sets, relations, functions, algebra, and calculus. Essential for board exams and competitive prep.",
-        "fileLink": "path/to/your/actual-book.pdf"
+        "description": "A comprehensive guide to Class 11 Mathematics, covering sets, relations, functions, algebra, and calculus. Essential for board exams and competitive preparation.",
+        "fileLink": "https://ncert.nic.in/textbook/pdf/kemh1dd.zip"
     },
     {
         "id": "book-02",
@@ -17,6 +17,66 @@
         "category": "science",
         "img": "https://placehold.co/200x300/eee/333?text=Physics+11",
         "description": "Dive into the physical world, kinematics, laws of motion, and thermodynamics. This text builds the foundational concepts required for advanced physics.",
-        "fileLink": "path/to/your/actual-book.pdf"
+        "fileLink": "https://ncert.nic.in/textbook/pdf/keph1dd.zip"
+    },
+    {
+        "id": "book-03",
+        "title": "NCERT 11 Chemistry",
+        "author": "NCERT Board",
+        "pages": 310,
+        "category": "science",
+        "img": "https://placehold.co/200x300/eee/333?text=Chem+11",
+        "description": "Explore the basic concepts of chemistry, structure of atom, chemical bonding, and molecular structure. A must-have for all science stream students.",
+        "fileLink": "https://ncert.nic.in/textbook/pdf/kech1dd.zip"
+    },
+    {
+        "id": "book-04",
+        "title": "NCERT 11 Hornbill",
+        "author": "NCERT Board",
+        "pages": 120,
+        "category": "english",
+        "img": "https://placehold.co/200x300/eee/333?text=Hornbill",
+        "description": "The core course textbook in English for Class 11. It features a rich collection of prose and poetry designed to enhance language skills and literary appreciation.",
+        "fileLink": "https://ncert.nic.in/textbook/pdf/kehb1dd.zip"
+    },
+    {
+        "id": "book-05",
+        "title": "NCERT 9 Geography",
+        "author": "NCERT Board",
+        "pages": 150,
+        "category": "science",
+        "img": "https://placehold.co/200x300/eee/333?text=Geo+9",
+        "description": "Contemporary India - I. Learn about India's size, location, physical features, climate, and population dynamics.",
+        "fileLink": "https://ncert.nic.in/textbook/pdf/iess1dd.zip"
+    },
+    {
+        "id": "book-06",
+        "title": "NCERT 10 Mathematics",
+        "author": "NCERT Board",
+        "pages": 380,
+        "category": "math",
+        "img": "https://placehold.co/200x300/eee/333?text=Math+10",
+        "description": "The definitive textbook for Class 10 board prep. Covers polynomials, quadratic equations, trigonometry, and surface areas.",
+        "fileLink": "https://ncert.nic.in/textbook/pdf/jemh1dd.zip"
+    },
+    {
+        "id": "book-07",
+        "title": "NCERT 9 Beehive",
+        "author": "NCERT Board",
+        "pages": 175,
+        "category": "english",
+        "img": "https://placehold.co/200x300/eee/333?text=Beehive",
+        "description": "A textbook in English for Class 9, filled with engaging stories and poems to build foundational language comprehension.",
+        "fileLink": "https://ncert.nic.in/textbook/pdf/iebe1dd.zip"
+    },
+    {
+        "id": "book-08",
+        "title": "Everyone Brave is Forgiven",
+        "author": "Chris Cleave",
+        "pages": 448,
+        "category": "english",
+        "img": "https://placehold.co/200x300/eee/333?text=Everyone+Brave",
+        "description": "A beautiful book depicting immense courage and bravery. It stands as a commendable inspiration for all students traversing difficult times.",
+        "fileLink": "#"
     }
 ]

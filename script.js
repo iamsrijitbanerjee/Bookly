@@ -24,7 +24,6 @@ if (themeBtn) {
 // --- JSON Database & Dynamic Rendering ---
 const libraryContainer = document.getElementById('library-container');
 
-// Only fetch if we are on a page that needs the library
 if (libraryContainer) {
     fetch('books.json')
         .then(response => response.json())
@@ -45,55 +44,20 @@ function renderLibrary(booksData) {
 
         bookCard.innerHTML = `
             <i class="far fa-heart fav-btn" data-id="${book.id}"></i>
-            <img src="${book.img}" alt="${book.title}" class="card-cover">
+            <img src="${book.img}" alt="${book.title}" style="cursor: pointer;" class="trigger-modal">
             <h3>${book.title}</h3>
-            <button class="btn view-details-btn">View Book</button>
+            <button class="btn trigger-modal">View Book</button>
         `;
         libraryContainer.appendChild(bookCard);
 
-        // Add event listener to open the modal for this specific book
-        const viewBtn = bookCard.querySelector('.view-details-btn');
-        viewBtn.addEventListener('click', () => openModal(book));
+        // Allow clicking either the image or the button to open the modal
+        const triggers = bookCard.querySelectorAll('.trigger-modal');
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => openModal(book));
+        });
     });
 
     attachFavoriteListeners(); 
-}
-
-// --- Modal & PDF Reader Logic ---
-const modal = document.getElementById('book-modal');
-const closeModalBtn = document.getElementById('close-modal');
-
-function openModal(book) {
-    if(!modal) return;
-    
-    // Populate the modal with the selected book's JSON data
-    document.getElementById('modal-img').src = book.img;
-    document.getElementById('modal-title').textContent = book.title;
-    document.getElementById('modal-author').textContent = book.author || "Unknown";
-    document.getElementById('modal-pages').textContent = book.pages || "N/A";
-    document.getElementById('modal-desc').textContent = book.description || "No description available.";
-    
-    // Set up the Read and Download links
-    document.getElementById('modal-read-btn').href = book.fileLink;
-    document.getElementById('modal-download-btn').href = book.fileLink;
-
-    // Show the modal
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-
-// Close Modal Functions
-if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
-}
-// Close when clicking outside the white box
-window.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-});
-
-function closeModal() {
-    modal.classList.add('hidden');
-    document.body.style.overflow = 'auto'; // Restore background scrolling
 }
 
 function setupFilters(allBooks) {
@@ -115,7 +79,40 @@ function setupFilters(allBooks) {
     });
 }
 
-// Favorites Logic
+// --- Modal & Native PDF Reader Logic ---
+const modal = document.getElementById('book-modal');
+const closeModalBtn = document.getElementById('close-modal');
+
+function openModal(book) {
+    if (!modal) return;
+    
+    // Inject JSON data into the modal UI
+    document.getElementById('modal-img').src = book.img;
+    document.getElementById('modal-title').textContent = book.title;
+    document.getElementById('modal-author').textContent = book.author || "Unknown";
+    document.getElementById('modal-pages').textContent = book.pages || "N/A";
+    document.getElementById('modal-desc').textContent = book.description || "No description available.";
+    
+    document.getElementById('modal-read-btn').href = book.fileLink;
+    document.getElementById('modal-download-btn').href = book.fileLink;
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Lock background scroll
+}
+
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+}
+window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal(); // Click outside to close
+});
+
+function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Unlock scroll
+}
+
+// --- Favorites Logic ---
 function attachFavoriteListeners() {
     const favButtons = document.querySelectorAll('.fav-btn');
     let favorites = JSON.parse(localStorage.getItem('booklyFavs')) || [];
@@ -129,6 +126,8 @@ function attachFavoriteListeners() {
 
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation(); // Prevents opening the modal when clicking the heart
+            
             const id = btn.getAttribute('data-id');
             if (favorites.includes(id)) {
                 favorites = favorites.filter(fav => fav !== id);
@@ -146,7 +145,6 @@ function attachFavoriteListeners() {
     });
 }
 
-// Render Favorites purely on the Library page
 function renderFavorites() {
     const favContainer = document.getElementById('favorites-container');
     if (!favContainer) return;
@@ -161,7 +159,27 @@ function renderFavorites() {
         if (favorites.includes(id)) {
             hasFavs = true;
             let clone = book.cloneNode(true);
-            clone.querySelector('.fav-btn').addEventListener('click', () => book.querySelector('.fav-btn').click());
+            
+            // Re-attach listeners to the clone so it works inside the Favorites section too
+            clone.querySelector('.fav-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                book.querySelector('.fav-btn').click();
+            });
+            
+            // We have to re-fetch the book object from the DOM to attach the modal to the clone
+            const triggers = clone.querySelectorAll('.trigger-modal');
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    // Quick and dirty way to re-fetch the JSON object based on ID
+                    fetch('books.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            const bookData = data.find(b => b.id === id);
+                            openModal(bookData);
+                        });
+                });
+            });
+            
             favContainer.appendChild(clone);
         }
     });
@@ -174,7 +192,6 @@ function renderFavorites() {
 // Swiper Sliders
 if (typeof Swiper !== 'undefined') {
     const sliderSettings = { loop: true, spaceBetween: 20, autoplay: { delay: 3500, disableOnInteraction: false }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } } };
-    
     new Swiper(".hero-slider", { loop: true, centeredSlides: true, autoplay: { delay: 2500 }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } } });
     new Swiper(".trending-slider", sliderSettings);
     new Swiper(".arrivals-slider", sliderSettings);
