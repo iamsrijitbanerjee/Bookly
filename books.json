@@ -90,13 +90,13 @@
         "fileLink": "https://ncert.nic.in/textbook/pdf/kecs1dd.zip"
     },
     {
-        "id": "11.book-5B",
-        "title": "NCERT 11 Biology Part 2",
+        "id": "11.book-7",
+        "title": "NCERT 11 Fine Arts",
         "author": "NCERT Board",
         "pages": 380,
-        "category": "science",
-        "img": "image/11/book-5B.png",
-        "description": "The definitive textbook for Class 11 biology. Covers the fundamentals of life sciences and prepares students for advanced studies.",
-        "fileLink": "https://ncert.nic.in/textbook/pdf/jemh1dd.zip"
+        "category": "arts",
+        "img": "image/11/book-7.jpg",
+        "description": "The definitive textbook for Class 11 Fine Arts. Covers the fundamentals of visual arts and prepares students for advanced studies.",
+        "fileLink": "https://ncert.nic.in/textbook/pdf/kefa1dd.zip"
     }
 ]
