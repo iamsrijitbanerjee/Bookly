@@ -136,26 +136,95 @@ function setupFilters(allBooks) {
     });
 }
 
-// --- MODAL LOGIC ---
+// --- MODAL & CUSTOM PLAYLIST LOGIC ---
+
 const modal = document.getElementById('book-modal');
 const closeModalBtn = document.getElementById('close-modal');
+let currentModalBookId = null; // Tracks which book is currently open in the modal
 
+// 1. Data Migration: Convert old flat array to new Object format without losing user data
+let playlists = JSON.parse(localStorage.getItem('booklyPlaylists'));
+if (!playlists) {
+    let oldFavs = JSON.parse(localStorage.getItem('booklyFavs')) || [];
+    playlists = { "Favorites": oldFavs }; // Set default folder
+    localStorage.setItem('booklyPlaylists', JSON.stringify(playlists));
+}
+
+// 2. Open Modal Update
 function openModal(book) {
     if (!modal) return;
+    currentModalBookId = book.id; 
     
     document.getElementById('modal-img').src = book.img;
     document.getElementById('modal-title').textContent = book.title;
     document.getElementById('modal-author').textContent = book.author || "Unknown";
     document.getElementById('modal-pages').textContent = book.pages || "N/A";
     document.getElementById('modal-desc').textContent = book.description || "No description available.";
-    
     document.getElementById('modal-read-btn').href = book.fileLink;
     document.getElementById('modal-download-btn').href = book.fileLink;
+
+    // Reset playlist UI elements
+    populatePlaylistDropdown();
+    document.getElementById('playlist-msg').style.display = 'none';
+    document.getElementById('new-playlist-input').value = '';
 
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden'; 
 }
 
+// 3. Populate Dropdown with user's custom folders
+function populatePlaylistDropdown() {
+    const select = document.getElementById('playlist-select');
+    if(!select) return;
+    select.innerHTML = ''; 
+    
+    playlists = JSON.parse(localStorage.getItem('booklyPlaylists'));
+    
+    for (let folderName in playlists) {
+        let option = document.createElement('option');
+        option.value = folderName;
+        option.textContent = folderName;
+        select.appendChild(option);
+    }
+}
+
+// 4. Save to Playlist Action
+const saveBtn = document.getElementById('save-playlist-btn');
+if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+        if (!currentModalBookId) return;
+
+        const selectVal = document.getElementById('playlist-select').value;
+        const inputVal = document.getElementById('new-playlist-input').value.trim();
+        const folderToSaveTo = inputVal ? inputVal : selectVal; // Prioritize new input if typed
+
+        // Create new folder if it doesn't exist
+        if (!playlists[folderToSaveTo]) {
+            playlists[folderToSaveTo] = [];
+        }
+
+        // Add book if not already inside that specific folder
+        if (!playlists[folderToSaveTo].includes(currentModalBookId)) {
+            playlists[folderToSaveTo].push(currentModalBookId);
+            localStorage.setItem('booklyPlaylists', JSON.stringify(playlists));
+        }
+
+        // UI Feedback
+        const msg = document.getElementById('playlist-msg');
+        msg.textContent = `Saved to "${folderToSaveTo}"!`;
+        msg.style.display = 'block';
+        attachFavoriteListeners(); // Update heart icons globally
+
+        // Refresh dropdown immediately if a new folder was created
+        if (inputVal) {
+            populatePlaylistDropdown();
+            document.getElementById('playlist-select').value = folderToSaveTo;
+            document.getElementById('new-playlist-input').value = '';
+        }
+    });
+}
+
+// Close Modal standard logic
 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
@@ -164,74 +233,49 @@ function closeModal() {
     document.body.style.overflow = 'auto'; 
 }
 
-// --- FAVORITES LOGIC ---
+// ==========================================
+// --- HEART ICON (QUICK SAVE) LOGIC ---
+// ==========================================
+
 function attachFavoriteListeners() {
     const favButtons = document.querySelectorAll('.fav-btn');
-    let favorites = JSON.parse(localStorage.getItem('booklyFavs')) || [];
+    playlists = JSON.parse(localStorage.getItem('booklyPlaylists')) || { "Favorites": [] };
 
     favButtons.forEach(btn => {
         const bookId = btn.getAttribute('data-id');
-        if (favorites.includes(bookId)) {
+        
+        // Check if book exists in ANY of the user's folders
+        let isSavedAnywhere = Object.values(playlists).some(folder => folder.includes(bookId));
+
+        if (isSavedAnywhere) {
             btn.classList.add('active');
             btn.classList.replace('far', 'fas'); 
+        } else {
+            btn.classList.remove('active');
+            btn.classList.replace('fas', 'far'); 
         }
 
+        // Clicking the heart directly defaults to toggling it in the primary "Favorites" folder
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation(); 
             
             const id = btn.getAttribute('data-id');
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(fav => fav !== id);
-                btn.classList.remove('active');
-                btn.classList.replace('fas', 'far');
+            let inFavorites = playlists["Favorites"] && playlists["Favorites"].includes(id);
+
+            if (inFavorites) {
+                // Remove from primary folder
+                playlists["Favorites"] = playlists["Favorites"].filter(fav => fav !== id);
             } else {
-                favorites.push(id);
-                btn.classList.add('active');
-                btn.classList.replace('far', 'fas');
+                // Add to primary folder (ensure folder exists first)
+                if(!playlists["Favorites"]) playlists["Favorites"] = [];
+                playlists["Favorites"].push(id);
             }
-            localStorage.setItem('booklyFavs', JSON.stringify(favorites));
             
-            if (document.getElementById('favorites-container')) renderFavorites();
+            localStorage.setItem('booklyPlaylists', JSON.stringify(playlists));
+            attachFavoriteListeners(); // Re-evaluate all hearts
         });
     });
-}
-
-function renderFavorites() {
-    const favContainer = document.getElementById('favorites-container');
-    if (!favContainer) return;
-    
-    const allBooks = document.querySelectorAll('.all-books .book-card');
-    let favorites = JSON.parse(localStorage.getItem('booklyFavs')) || [];
-    favContainer.innerHTML = ''; 
-    let hasFavs = false;
-
-    allBooks.forEach(book => {
-        const id = book.querySelector('.fav-btn').getAttribute('data-id');
-        if (favorites.includes(id)) {
-            hasFavs = true;
-            let clone = book.cloneNode(true);
-            
-            clone.querySelector('.fav-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                book.querySelector('.fav-btn').click();
-            });
-            
-            const triggers = clone.querySelectorAll('.trigger-modal');
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', () => {
-                    const bookData = globalBooks.find(b => b.id === id);
-                    if(bookData) openModal(bookData);
-                });
-            });
-            
-            favContainer.appendChild(clone);
-        }
-    });
-
-    if (!hasFavs) {
-        favContainer.innerHTML = '<p style="font-size:1.6rem; color:var(--text-light);">Click the heart icon on any book to add it here!</p>';
-    }
 }
 
 // Swiper Sliders
