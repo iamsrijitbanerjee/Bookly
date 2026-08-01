@@ -1,0 +1,30 @@
+[
+    {
+        "id": "book-01",
+        "title": "NCERT 11 Mathematics",
+        "category": "math",
+        "img": "https://placehold.co/200x300/eee/333?text=Math+11",
+        "downloadLink": "#"
+    },
+    {
+        "id": "book-02",
+        "title": "NCERT 11 Physics",
+        "category": "science",
+        "img": "https://placehold.co/200x300/eee/333?text=Physics+11",
+        "downloadLink": "#"
+    },
+    {
+        "id": "book-03",
+        "title": "NCERT 11 Chemistry",
+        "category": "science",
+        "img": "https://placehold.co/200x300/eee/333?text=Chem+11",
+        "downloadLink": "#"
+    },
+    {
+        "id": "book-04",
+        "title": "NCERT 11 Hornbill",
+        "category": "english",
+        "img": "https://placehold.co/200x300/eee/333?text=Hornbill",
+        "downloadLink": "#"
+    }
+]
