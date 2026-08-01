@@ -2,7 +2,9 @@ window.addEventListener('load', () => {
     setTimeout(() => { document.querySelector('.loader-container').classList.add('hidden'); }, 1200);
 });
 
-// Theme Toggle
+// ==========================================
+// --- THEME TOGGLE ---
+// ==========================================
 const themeBtn = document.getElementById('theme-toggle');
 if (themeBtn) {
     if (localStorage.getItem('booklyTheme') === 'dark') {
@@ -21,23 +23,31 @@ if (themeBtn) {
     });
 }
 
+// ==========================================
 // --- GLOBAL DATABASE FETCH ---
+// ==========================================
 let globalBooks = [];
 fetch('books.json')
     .then(response => response.json())
     .then(books => {
         globalBooks = books;
         
-        // Initialize Library if we are on library.html
-        const libraryContainer = document.getElementById('library-container');
-        if (libraryContainer) {
+        // Initialize Library Grid
+        if (document.getElementById('library-container')) {
             renderLibrary(globalBooks);
             setupFilters(globalBooks);
+        }
+        
+        // Initialize Collections Dashboard
+        if (document.getElementById('collections-container')) {
+            renderCollections();
         }
     })
     .catch(error => console.error('Error loading the database:', error));
 
+// ==========================================
 // --- LIVE SEARCH ENGINE ---
+// ==========================================
 const searchBox = document.getElementById('search-box');
 const searchResults = document.getElementById('search-results');
 
@@ -50,14 +60,13 @@ if (searchBox && searchResults) {
             return;
         }
 
-        // Filter by title, author, or category
         const filtered = globalBooks.filter(book => 
             book.title.toLowerCase().includes(term) || 
             (book.author && book.author.toLowerCase().includes(term)) ||
             (book.category && book.category.toLowerCase().includes(term))
         );
         
-        searchResults.innerHTML = ''; // Clear previous
+        searchResults.innerHTML = ''; 
 
         if (filtered.length === 0) {
             searchResults.innerHTML = '<div class="search-item"><p>No books found matching your query.</p></div>';
@@ -72,11 +81,10 @@ if (searchBox && searchResults) {
                         <p>${book.author || 'Unknown Author'}</p>
                     </div>
                 `;
-                // Click a search result to open modal
                 item.addEventListener('click', () => {
                     openModal(book);
                     searchResults.classList.add('hidden');
-                    searchBox.value = ''; // Reset input
+                    searchBox.value = ''; 
                 });
                 searchResults.appendChild(item);
             });
@@ -84,7 +92,6 @@ if (searchBox && searchResults) {
         searchResults.classList.remove('hidden');
     });
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.search-form')) {
             searchResults.classList.add('hidden');
@@ -92,7 +99,9 @@ if (searchBox && searchResults) {
     });
 }
 
+// ==========================================
 // --- LIBRARY RENDERING ---
+// ==========================================
 function renderLibrary(booksData) {
     const libraryContainer = document.getElementById('library-container');
     libraryContainer.innerHTML = ''; 
@@ -136,21 +145,21 @@ function setupFilters(allBooks) {
     });
 }
 
+// ==========================================
 // --- MODAL & CUSTOM PLAYLIST LOGIC ---
-
+// ==========================================
 const modal = document.getElementById('book-modal');
 const closeModalBtn = document.getElementById('close-modal');
-let currentModalBookId = null; // Tracks which book is currently open in the modal
+let currentModalBookId = null; 
 
-// 1. Data Migration: Convert old flat array to new Object format without losing user data
+// Data Migration Script
 let playlists = JSON.parse(localStorage.getItem('booklyPlaylists'));
 if (!playlists) {
     let oldFavs = JSON.parse(localStorage.getItem('booklyFavs')) || [];
-    playlists = { "Favorites": oldFavs }; // Set default folder
+    playlists = { "Favorites": oldFavs }; 
     localStorage.setItem('booklyPlaylists', JSON.stringify(playlists));
 }
 
-// 2. Open Modal Update
 function openModal(book) {
     if (!modal) return;
     currentModalBookId = book.id; 
@@ -163,23 +172,22 @@ function openModal(book) {
     document.getElementById('modal-read-btn').href = book.fileLink;
     document.getElementById('modal-download-btn').href = book.fileLink;
 
-    // Reset playlist UI elements
     populatePlaylistDropdown();
-    document.getElementById('playlist-msg').style.display = 'none';
-    document.getElementById('new-playlist-input').value = '';
+    const msg = document.getElementById('playlist-msg');
+    const input = document.getElementById('new-playlist-input');
+    if(msg) msg.style.display = 'none';
+    if(input) input.value = '';
 
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden'; 
 }
 
-// 3. Populate Dropdown with user's custom folders
 function populatePlaylistDropdown() {
     const select = document.getElementById('playlist-select');
     if(!select) return;
     select.innerHTML = ''; 
     
     playlists = JSON.parse(localStorage.getItem('booklyPlaylists'));
-    
     for (let folderName in playlists) {
         let option = document.createElement('option');
         option.value = folderName;
@@ -188,7 +196,6 @@ function populatePlaylistDropdown() {
     }
 }
 
-// 4. Save to Playlist Action
 const saveBtn = document.getElementById('save-playlist-btn');
 if (saveBtn) {
     saveBtn.addEventListener('click', () => {
@@ -196,26 +203,22 @@ if (saveBtn) {
 
         const selectVal = document.getElementById('playlist-select').value;
         const inputVal = document.getElementById('new-playlist-input').value.trim();
-        const folderToSaveTo = inputVal ? inputVal : selectVal; // Prioritize new input if typed
+        const folderToSaveTo = inputVal ? inputVal : selectVal; 
 
-        // Create new folder if it doesn't exist
-        if (!playlists[folderToSaveTo]) {
-            playlists[folderToSaveTo] = [];
-        }
+        if (!playlists[folderToSaveTo]) playlists[folderToSaveTo] = [];
 
-        // Add book if not already inside that specific folder
         if (!playlists[folderToSaveTo].includes(currentModalBookId)) {
             playlists[folderToSaveTo].push(currentModalBookId);
             localStorage.setItem('booklyPlaylists', JSON.stringify(playlists));
         }
 
-        // UI Feedback
         const msg = document.getElementById('playlist-msg');
         msg.textContent = `Saved to "${folderToSaveTo}"!`;
         msg.style.display = 'block';
-        attachFavoriteListeners(); // Update heart icons globally
+        
+        attachFavoriteListeners(); 
+        if (document.getElementById('collections-container')) renderCollections();
 
-        // Refresh dropdown immediately if a new folder was created
         if (inputVal) {
             populatePlaylistDropdown();
             document.getElementById('playlist-select').value = folderToSaveTo;
@@ -224,27 +227,22 @@ if (saveBtn) {
     });
 }
 
-// Close Modal standard logic
 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
 function closeModal() {
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto'; 
 }
 
 // ==========================================
-// --- HEART ICON (QUICK SAVE) LOGIC ---
+// --- HEART ICON & COLLECTIONS DASHBOARD ---
 // ==========================================
-
 function attachFavoriteListeners() {
     const favButtons = document.querySelectorAll('.fav-btn');
     playlists = JSON.parse(localStorage.getItem('booklyPlaylists')) || { "Favorites": [] };
 
     favButtons.forEach(btn => {
         const bookId = btn.getAttribute('data-id');
-        
-        // Check if book exists in ANY of the user's folders
         let isSavedAnywhere = Object.values(playlists).some(folder => folder.includes(bookId));
 
         if (isSavedAnywhere) {
@@ -255,7 +253,6 @@ function attachFavoriteListeners() {
             btn.classList.replace('fas', 'far'); 
         }
 
-        // Clicking the heart directly defaults to toggling it in the primary "Favorites" folder
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation(); 
@@ -264,21 +261,89 @@ function attachFavoriteListeners() {
             let inFavorites = playlists["Favorites"] && playlists["Favorites"].includes(id);
 
             if (inFavorites) {
-                // Remove from primary folder
                 playlists["Favorites"] = playlists["Favorites"].filter(fav => fav !== id);
             } else {
-                // Add to primary folder (ensure folder exists first)
                 if(!playlists["Favorites"]) playlists["Favorites"] = [];
                 playlists["Favorites"].push(id);
             }
             
             localStorage.setItem('booklyPlaylists', JSON.stringify(playlists));
-            attachFavoriteListeners(); // Re-evaluate all hearts
+            attachFavoriteListeners(); 
+            if (document.getElementById('collections-container')) renderCollections();
         });
     });
 }
 
-// Swiper Sliders
+function renderCollections() {
+    const collectionsContainer = document.getElementById('collections-container');
+    const tabsContainer = document.getElementById('playlist-tabs');
+    
+    if (!collectionsContainer || !tabsContainer) return;
+    
+    playlists = JSON.parse(localStorage.getItem('booklyPlaylists')) || { "Favorites": [] };
+    
+    let activePlaylist = localStorage.getItem('booklyActiveTab');
+    if (!activePlaylist || !playlists[activePlaylist]) {
+        activePlaylist = Object.keys(playlists)[0]; 
+    }
+
+    tabsContainer.innerHTML = '';
+    collectionsContainer.innerHTML = '';
+
+    for (let folderName in playlists) {
+        const tab = document.createElement('button');
+        tab.className = `btn ${folderName === activePlaylist ? '' : 'outline'}`;
+        tab.style.margin = '0.5rem';
+        tab.innerHTML = `<i class="fas fa-folder"></i> ${folderName} (${playlists[folderName].length})`;
+        
+        tab.addEventListener('click', () => {
+            localStorage.setItem('booklyActiveTab', folderName);
+            renderCollections(); 
+        });
+        
+        tabsContainer.appendChild(tab);
+    }
+
+    const activeBooks = playlists[activePlaylist] || [];
+    
+    if (activeBooks.length === 0) {
+        collectionsContainer.innerHTML = `<p style="font-size:1.6rem; color:var(--text-light); text-align:center; width:100%;">This collection is empty. Browse the library to add books here!</p>`;
+        return;
+    }
+
+    const booksToRender = globalBooks.filter(book => activeBooks.includes(book.id));
+
+    booksToRender.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.className = `book-card`;
+
+        bookCard.innerHTML = `
+            <i class="fas fa-heart fav-btn active" data-id="${book.id}"></i>
+            <img src="${book.img}" alt="${book.title}" style="cursor: pointer;" class="trigger-modal">
+            <h3>${book.title}</h3>
+            <button class="btn trigger-modal">View Book</button>
+        `;
+        
+        const triggers = bookCard.querySelectorAll('.trigger-modal');
+        triggers.forEach(trigger => trigger.addEventListener('click', () => openModal(book)));
+
+        const heart = bookCard.querySelector('.fav-btn');
+        heart.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            playlists[activePlaylist] = playlists[activePlaylist].filter(id => id !== book.id);
+            localStorage.setItem('booklyPlaylists', JSON.stringify(playlists));
+            
+            renderCollections(); 
+            attachFavoriteListeners(); 
+        });
+
+        collectionsContainer.appendChild(bookCard);
+    });
+}
+
+// --- SWIPER SLIDERS ---
 if (typeof Swiper !== 'undefined') {
     const sliderSettings = { loop: true, spaceBetween: 20, autoplay: { delay: 3500, disableOnInteraction: false }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } } };
     new Swiper(".hero-slider", { loop: true, centeredSlides: true, autoplay: { delay: 2500 }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } } });
