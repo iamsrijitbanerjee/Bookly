@@ -16,16 +16,12 @@
     <header class="header">
         <div class="header-1">
             <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
-            
             <form action="" class="search-form">
                 <input type="search" placeholder="Search by title, author, or category..." id="search-box">
                 <label for="search-box" class="fas fa-search"></label>
                 <div id="search-results" class="search-results-container hidden"></div>
             </form>
-
-            <div class="icons">
-                <i class="fas fa-moon" id="theme-toggle"></i>
-            </div>
+            <div class="icons"><i class="fas fa-moon" id="theme-toggle"></i></div>
         </div>
         <nav class="navbar">
             <a href="index.html">Home</a>
@@ -37,21 +33,87 @@
 
     <main>
         <section>
-            <h2 class="heading"><span>Our Journey</span></h2>
-            <div style="max-width: 600px; margin: 0 auto;">
+            <h2 class="heading"><span>The Mission</span></h2>
+            <div class="mission-row">
+                <div class="mission-content">
+                    <h3>Democratizing Education for All</h3>
+                    <p>At Bookly, we believe that a lack of financial resources should never stand in the way of a student's potential. Textbooks are expensive, and accessing high-quality curriculums can be a major hurdle for many.</p>
+                    <p>Our mission is simple: to provide a sleek, fast, and completely free hub for essential educational materials. By bringing together NCERT texts and classic literature into one organized platform, we aim to empower students to learn on their own terms, anywhere in the world.</p>
+                </div>
+                <div class="mission-image">
+                    <img src="https://placehold.co/600x400/27ae60/white?text=Students+Learning" alt="Our Mission">
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-box">
+                    <i class="fas fa-book"></i>
+                    <h3>17+</h3>
+                    <p>Curated Books</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-users"></i>
+                    <h3>5,000+</h3>
+                    <p>Active Students</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-download"></i>
+                    <h3>10k+</h3>
+                    <p>Free Downloads</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-globe"></i>
+                    <h3>100%</h3>
+                    <p>Open Access</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--card-bg);">
+            <h2 class="heading"><span>The Journey</span></h2>
+            <div style="max-width: 800px; margin: 0 auto;">
                 <div class="timeline">
                     <div class="timeline-item">
-                        <h3>2020: The Side Quest Begins</h3>
-                        <p>Bookly started as a small personal project to help peers find textbooks easily without hitting paywalls.</p>
+                        <span>Phase 1 • 2020</span>
+                        <h3>The Side Quest Begins</h3>
+                        <p>Bookly started as a humble side project. Built over a few weekends, it was a simple HTML page designed to help a small group of peers find textbooks easily without hitting paywalls or dealing with sketchy ad-filled download sites.</p>
                     </div>
                     <div class="timeline-item">
-                        <h3>2022: Expanding the Library</h3>
-                        <p>Added over 15+ official NCERT curriculums, reaching students across multiple regions.</p>
+                        <span>Phase 2 • 2022</span>
+                        <h3>Expanding the Library</h3>
+                        <p>As word spread, the demand grew. We expanded the catalog to include over 15+ official NCERT curriculums, spanning Mathematics, Science, and English for middle and high school students across multiple regions.</p>
                     </div>
                     <div class="timeline-item">
-                        <h3>2024: A Modern Hub</h3>
-                        <p>Completely redesigned to offer a faster, more aesthetic learning experience, featuring native PDF integration.</p>
+                        <span>Phase 3 • 2024</span>
+                        <h3>The Modern Hub Rebirth</h3>
+                        <p>Realizing the potential to help thousands more, Bookly was completely architected. We migrated to a dynamic JSON database, integrated a native in-browser PDF reader, and built personalized study playlists—transforming a simple webpage into a fully-fledged web application.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="heading"><span>External Resources</span></h2>
+            <p style="text-align: center; font-size: 1.6rem; margin-bottom: 4rem; color: var(--text-light);">Check out these other highly recommended free resources to aid your studies.</p>
+            
+            <div class="book-grid">
+                <div class="book-card" style="padding: 4rem 2rem;">
+                    <i class="fas fa-university" style="font-size: 5rem; color: var(--green); margin-bottom: 2rem;"></i>
+                    <h3>NCERT Official Portal</h3>
+                    <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">Direct access to government curriculums and latest syllabus updates.</p>
+                    <a href="https://ncert.nic.in/" target="_blank" class="btn outline">Visit Site</a>
+                </div>
+                <div class="book-card" style="padding: 4rem 2rem;">
+                    <i class="fas fa-laptop-code" style="font-size: 5rem; color: var(--green); margin-bottom: 2rem;"></i>
+                    <h3>Khan Academy</h3>
+                    <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">Free, world-class video tutorials and interactive practice lessons.</p>
+                    <a href="https://www.khanacademy.org/" target="_blank" class="btn outline">Visit Site</a>
+                </div>
+                <div class="book-card" style="padding: 4rem 2rem;">
+                    <i class="fas fa-book-open" style="font-size: 5rem; color: var(--green); margin-bottom: 2rem;"></i>
+                    <h3>Project Gutenberg</h3>
+                    <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">A library of over 70,000 free classic eBooks and public domain literature.</p>
+                    <a href="https://www.gutenberg.org/" target="_blank" class="btn outline">Visit Site</a>
                 </div>
             </div>
         </section>
@@ -62,7 +124,7 @@
                 <i class="fas fa-lightbulb" style="font-size: 5rem; color: #f1c40f; margin-bottom: 2rem;"></i>
                 <p style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 2rem;">Can't find what you're looking for? Let us know!</p>
                 <form action="#">
-                    <input type="text" class="input-box" placeholder="Book Title & Author" required>
+                    <input type="text" class="input-box" placeholder="Book Title & Author" required style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); font-size: 1.5rem; outline: none;">
                     <input type="submit" value="Submit Suggestion" class="btn" style="width: 100%;">
                 </form>
             </div>
@@ -78,23 +140,10 @@
                     <h2 id="modal-title">Book Title</h2>
                     <p class="author-line">By <span id="modal-author"></span> • <span id="modal-pages"></span> Pages</p>
                     <p id="modal-desc" class="description"></p>
-                    
                     <div class="modal-actions">
                         <a href="#" id="modal-read-btn" class="btn" target="_blank"><i class="fas fa-book-reader"></i> Read Online</a>
                         <a href="#" id="modal-download-btn" class="btn outline" download><i class="fas fa-download"></i> Download</a>
                     </div>
-
-                    <div class="playlist-controls" style="margin-top: 2.5rem; padding-top: 2rem; border-top: var(--border);">
-                        <p style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 1rem; font-weight: 500;">Save to Collection:</p>
-                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-                            <select id="playlist-select" style="padding: 1rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); outline: none; flex: 1; min-width: 130px; font-size: 1.4rem;">
-                                </select>
-                            <input type="text" id="new-playlist-input" placeholder="Or type new folder name..." style="padding: 1rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); outline: none; flex: 1.5; min-width: 180px; font-size: 1.4rem;">
-                            <button id="save-playlist-btn" class="btn outline" style="padding: 1rem 2rem; font-size: 1.5rem;"><i class="fas fa-plus"></i> Add</button>
-                        </div>
-                        <p id="playlist-msg" style="font-size: 1.3rem; color: var(--green); margin-top: 1rem; display: none;">Successfully saved!</p>
-                    </div>
-
                 </div>
             </div>
         </div>

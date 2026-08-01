@@ -11,11 +11,11 @@
     },
     {
         "id": "book-02",
-        "title": "NCERT 11 Physics",
+        "title": "NCERT 11 Physics Part 1",
         "author": "NCERT Board",
         "pages": 350,
         "category": "science",
-        "img": "https://placehold.co/200x300/eee/333?text=Physics+11",
+        "img": "image/book-2.png",
         "description": "Dive into the physical world, kinematics, laws of motion, and thermodynamics. This text builds the foundational concepts required for advanced physics.",
         "fileLink": "https://ncert.nic.in/textbook/pdf/keph1dd.zip"
     },
