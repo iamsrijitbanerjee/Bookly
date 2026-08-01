@@ -126,3 +126,21 @@ body.dark-mode .spotlight { background: radial-gradient(ellipse at top, rgba(255
 .timeline-item h3 { font-size: 2.2rem; color: var(--text-main); margin-bottom: 1rem; }
 .timeline-item span { display: inline-block; padding: 0.5rem 1rem; background: var(--card-bg); border: var(--border); border-radius: 5rem; font-size: 1.2rem; color: var(--green); margin-bottom: 1rem; font-weight: 600; }
 .timeline-item p { font-size: 1.5rem; color: var(--text-light); line-height: 1.7; }
+
+/* ==========================================
+   --- SUPPORT PAGE SPECIFICS ---
+========================================== */
+.contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); gap: 2rem; margin-bottom: 5rem; }
+.contact-card { background: var(--card-bg); border: var(--border); border-radius: 1rem; padding: 3rem 2rem; text-align: center; box-shadow: var(--shadow); transition: transform 0.3s; }
+.contact-card:hover { transform: translateY(-5px); border-color: var(--green); }
+.contact-card i { font-size: 4rem; color: var(--green); margin-bottom: 1.5rem; }
+.contact-card h3 { font-size: 2rem; color: var(--text-main); margin-bottom: 1rem; }
+.contact-card p { font-size: 1.4rem; color: var(--text-light); }
+
+.faq-container { max-width: 80rem; margin: 0 auto 5rem; }
+.faq-container details { background: var(--card-bg); border: var(--border); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+.faq-container summary { font-size: 1.6rem; color: var(--text-main); font-weight: 500; padding: 2rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.faq-container summary::-webkit-details-marker { display: none; }
+.faq-container summary::after { content: '\f078'; font-family: 'Font Awesome 5 Free'; font-weight: 900; color: var(--green); transition: transform 0.3s; }
+.faq-container details[open] summary::after { transform: rotate(180deg); }
+.faq-container details p { padding: 0 2rem 2rem; font-size: 1.4rem; color: var(--text-light); line-height: 1.8; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 1rem; padding-top: 1.5rem; }

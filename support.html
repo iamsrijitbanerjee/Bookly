@@ -16,13 +16,11 @@
     <header class="header">
         <div class="header-1">
             <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
-            
             <form action="" class="search-form">
                 <input type="search" placeholder="Search by title, author, or category..." id="search-box">
                 <label for="search-box" class="fas fa-search"></label>
                 <div id="search-results" class="search-results-container hidden"></div>
             </form>
-
             <div class="icons">
                 <i class="fas fa-moon" id="theme-toggle"></i>
             </div>
@@ -36,30 +34,77 @@
     </header>
 
     <main>
+        <section style="text-align: center; padding-bottom: 2rem;">
+            <h1 style="font-size: 4rem; color: var(--text-main); margin-bottom: 1rem;">How can we help?</h1>
+            <p style="font-size: 1.6rem; color: var(--text-light);">We are here to support your educational journey. Reach out anytime.</p>
+        </section>
+
+        <section style="padding-top: 0;">
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <h3>Email Us</h3>
+                    <p>thisissrijitbanerjee@gmail.com</p>
+                    <p style="font-size: 1.2rem; margin-top: 1rem;">Typical reply time: 24 hrs</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fab fa-discord"></i>
+                    <h3>Community</h3>
+                    <p>Join our active student server.</p>
+                    <a href="#" class="btn outline" style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 1.3rem;">Join Discord</a>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Call Support</h3>
+                    <p>+91 891-875-9546</p>
+                    <p style="font-size: 1.2rem; margin-top: 1rem;">Mon-Fri, 9am - 5pm IST</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--card-bg);">
+            <h2 class="heading"><span>Frequently Asked Questions</span></h2>
+            <div class="faq-container">
+                <details>
+                    <summary>Are the books really 100% free?</summary>
+                    <p>Yes. Our core mission is to democratize education. All standard NCERT textbooks and public domain literature hosted on Bookly will always be free to read and download without any hidden fees or paywalls.</p>
+                </details>
+                <details>
+                    <summary>Why isn't the "Read Online" feature working for me?</summary>
+                    <p>The "Read Online" feature relies on your browser's native PDF viewer. If it forces a download instead of opening a new tab, check your browser settings to ensure PDF viewing is enabled, or try using a modern browser like Chrome or Edge.</p>
+                </details>
+                <details>
+                    <summary>Can I request a specific book?</summary>
+                    <p>Absolutely! Head over to our <a href="explore.html" style="color: var(--green); text-decoration: underline;">Explore</a> page and use the "Suggest a Book" widget. We review suggestions weekly and prioritize based on curriculum demand.</p>
+                </details>
+                <details>
+                    <summary>Do I need to create an account to save custom playlists?</summary>
+                    <p>No! Your custom playlists and favorites are saved directly to your device's local storage. This means your data remains private and loads instantly, though clearing your browser cache will reset your folders.</p>
+                </details>
+            </div>
+        </section>
+
         <section style="display: flex; flex-wrap: wrap; gap: 3rem;">
-            
-            <div style="flex: 1 1 40rem; background: var(--card-bg); padding: 4rem; border-radius: 1rem; border: var(--border);">
-                <i class="fas fa-headset" style="font-size: 4rem; color: var(--green); margin-bottom: 1.5rem;"></i>
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Get a Quote / Support</h2>
-                <form action="mailto:thisissrijitbanerjee@gmail.com" method="POST">
-                    <input type="text" class="input-box" placeholder="Your Name" required>
-                    <input type="email" class="input-box" placeholder="Your Email" required>
+            <div style="flex: 1 1 40rem; background: var(--card-bg); padding: 4rem; border-radius: 1rem; border: var(--border); box-shadow: var(--shadow);">
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem; color: var(--text-main);">Send a Message</h2>
+                <form action="mailto:thisissrijitbanerjee@gmail.com" method="POST" enctype="text/plain">
+                    <input type="text" class="input-box" placeholder="Your Full Name" required>
+                    <input type="email" class="input-box" placeholder="Your Email Address" required>
                     <select class="input-box" style="width: 100%; border: var(--border);">
                         <option>General Inquiry</option>
-                        <option>Technical Issue (e.g. PDF not loading)</option>
+                        <option>Technical Issue (e.g., Broken Link)</option>
                         <option>Bulk Resource Request</option>
+                        <option>Partnership & Collaboration</option>
                     </select>
-                    <textarea class="input-box" placeholder="Write your message here..." rows="5" required></textarea>
-                    <input type="submit" value="Send Message" class="btn" style="width: 100%;">
+                    <textarea class="input-box" placeholder="Write your message here in detail..." rows="5" required></textarea>
+                    <input type="submit" value="Submit Ticket" class="btn" style="width: 100%;">
                 </form>
             </div>
 
             <div style="flex: 1 1 40rem;">
-                <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: var(--green); margin-bottom: 1.5rem;"></i>
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Our Hub Locations</h2>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117925.33439927718!2d88.26495095!3d22.5354273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1689255013083!5m2!1sen!2sin" width="100%" height="400" style="border:0; border-radius: 1rem; box-shadow: var(--shadow);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem; color: var(--text-main);">Our Location</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117925.33439927714!2d88.2649501533044!3d22.53540637453001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="min-height: 400px; border:0; border-radius: 1rem; box-shadow: var(--shadow);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-
         </section>
     </main>
 
@@ -72,23 +117,10 @@
                     <h2 id="modal-title">Book Title</h2>
                     <p class="author-line">By <span id="modal-author"></span> • <span id="modal-pages"></span> Pages</p>
                     <p id="modal-desc" class="description"></p>
-                    
                     <div class="modal-actions">
                         <a href="#" id="modal-read-btn" class="btn" target="_blank"><i class="fas fa-book-reader"></i> Read Online</a>
                         <a href="#" id="modal-download-btn" class="btn outline" download><i class="fas fa-download"></i> Download</a>
                     </div>
-
-                    <div class="playlist-controls" style="margin-top: 2.5rem; padding-top: 2rem; border-top: var(--border);">
-                        <p style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 1rem; font-weight: 500;">Save to Collection:</p>
-                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-                            <select id="playlist-select" style="padding: 1rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); outline: none; flex: 1; min-width: 130px; font-size: 1.4rem;">
-                                </select>
-                            <input type="text" id="new-playlist-input" placeholder="Or type new folder name..." style="padding: 1rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); outline: none; flex: 1.5; min-width: 180px; font-size: 1.4rem;">
-                            <button id="save-playlist-btn" class="btn outline" style="padding: 1rem 2rem; font-size: 1.5rem;"><i class="fas fa-plus"></i> Add</button>
-                        </div>
-                        <p id="playlist-msg" style="font-size: 1.3rem; color: var(--green); margin-top: 1rem; display: none;">Successfully saved!</p>
-                    </div>
-
                 </div>
             </div>
         </div>
