@@ -42,6 +42,11 @@ fetch('books.json')
         if (document.getElementById('collections-container')) {
             renderCollections();
         }
+
+        // Initialize Automated Book of the Week
+        if (document.getElementById('featured-book-container')) {
+            renderFeaturedBook();
+        }
     })
     .catch(error => console.error('Error loading the database:', error));
 
@@ -352,4 +357,47 @@ if (typeof Swiper !== 'undefined') {
     new Swiper(".science-slider", sliderSettings);
     new Swiper(".fiction-slider", sliderSettings);
     new Swiper(".reviews-slider", { loop: true, spaceBetween: 20, autoplay: { delay: 4000 }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } } });
+}
+// ==========================================
+// --- AUTOMATED BOOK OF THE WEEK ---
+// ==========================================
+function renderFeaturedBook() {
+    const featuredContainer = document.getElementById('featured-book-container');
+    if (!featuredContainer || globalBooks.length === 0) return;
+
+    // 1. Define your pool of featured book IDs
+    const featuredPool = ["book-08", "book-01", "book-04", "book-07"]; // Add any IDs you want in rotation
+
+    // 2. Calculate the current week number of the year
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+    const weekNumber = Math.floor(diff / oneWeek);
+
+    // 3. Use modulo math to seamlessly loop through the array based on the week
+    const selectedId = featuredPool[weekNumber % featuredPool.length];
+    
+    // Fallback to the first book in the database if the ID isn't found
+    const featuredBook = globalBooks.find(b => b.id === selectedId) || globalBooks[0];
+
+    // 4. Inject the HTML
+    featuredContainer.innerHTML = `
+        <img src="${featuredBook.img}" alt="Featured Book">
+        <div class="featured-content">
+            <h2>Featured Book of the Week</h2>
+            <h3>${featuredBook.title}</h3>
+            <p>${featuredBook.description || "A highly recommended resource for all students to explore this week."}</p>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <a href="${featuredBook.fileLink}" class="btn" target="_blank"><i class="fas fa-book-reader"></i> Read Online</a>
+                <button class="btn outline trigger-featured-modal" style="padding: 1rem 3rem;"><i class="fas fa-info-circle"></i> Details</button>
+            </div>
+        </div>
+    `;
+
+    // Hook up the Details button to our global modal
+    const detailsBtn = featuredContainer.querySelector('.trigger-featured-modal');
+    if (detailsBtn) {
+        detailsBtn.addEventListener('click', () => openModal(featuredBook));
+    }
 }
