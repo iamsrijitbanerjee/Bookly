@@ -54,7 +54,7 @@
         "title": "NCERT 11 Hornbill",
         "author": "NCERT Board",
         "pages": 120,
-        "category": "english",
+        "category": "humanities",
         "img": "image/11/book-4A.png",
         "description": "The core course textbook in English for Class 11. It features a rich collection of prose and poetry designed to enhance language skills and literary appreciation.",
         "fileLink": "https://ncert.nic.in/textbook/pdf/kehb1dd.zip"
@@ -64,7 +64,7 @@
         "title": "NCERT 11 Snapshots",
         "author": "NCERT Board",
         "pages": 150,
-        "category": "english",
+        "category": "humanities",
         "img": "image/11/book-4B.jpg",
         "description": "The core course textbook in English for Class 11. It features a rich collection of prose and poetry designed to enhance language skills and literary appreciation.",
         "fileLink": "https://ncert.nic.in/textbook/pdf/kesp1dd.zip"
@@ -94,7 +94,7 @@
         "title": "NCERT 11 Fine Arts",
         "author": "NCERT Board",
         "pages": 380,
-        "category": "arts",
+        "category": "humanities",
         "img": "image/11/book-7.jpg",
         "description": "The definitive textbook for Class 11 Fine Arts. Covers the fundamentals of visual arts and prepares students for advanced studies.",
         "fileLink": "https://ncert.nic.in/textbook/pdf/kefa1dd.zip"
