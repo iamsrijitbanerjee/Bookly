@@ -366,7 +366,7 @@ function renderFeaturedBook() {
     if (!featuredContainer || globalBooks.length === 0) return;
 
     // 1. Define your pool of featured book IDs
-    const featuredPool = ["book-08", "book-01", "book-04", "book-07"]; // Add any IDs you want in rotation
+    const featuredPool = ["11.book-6", "11.book-3B", "11.book-4A", "11.book-5"]; // Add any IDs you want in rotation
 
     // 2. Calculate the current week number of the year
     const now = new Date();
