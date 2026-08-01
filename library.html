@@ -16,6 +16,13 @@
     <header class="header">
         <div class="header-1">
             <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
+            
+            <form action="" class="search-form">
+                <input type="search" placeholder="Search by title, author, or category..." id="search-box">
+                <label for="search-box" class="fas fa-search"></label>
+                <div id="search-results" class="search-results-container hidden"></div>
+            </form>
+
             <div class="icons">
                 <i class="fas fa-moon" id="theme-toggle"></i>
             </div>
@@ -27,6 +34,26 @@
             <a href="support.html">Support</a>
         </nav>
     </header>
+
+    <main>
+        <section id="favorites" style="background: var(--card-bg);">
+            <h2 class="heading"><span>My Favorites</span></h2>
+            <div class="book-grid" id="favorites-container"></div>
+        </section>
+
+        <section class="all-books">
+            <h2 class="heading"><span>Complete Collection</span></h2>
+            
+            <div class="filter-menu">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="math">Mathematics</button>
+                <button class="filter-btn" data-filter="science">Science</button>
+                <button class="filter-btn" data-filter="english">English/Lit</button>
+            </div>
+
+            <div class="book-grid" id="library-container"></div>
+        </section>
+    </main>
 
     <div id="book-modal" class="modal-overlay hidden">
         <div class="modal-content">
@@ -45,27 +72,6 @@
             </div>
         </div>
     </div>
-
-    <main>
-        <section id="favorites" style="background: var(--card-bg);">
-            <h2 class="heading"><span>My Favorites</span></h2>
-            <div class="book-grid" id="favorites-container"></div>
-        </section>
-
-        <section class="all-books">
-            <h2 class="heading"><span>Complete Collection</span></h2>
-            
-            <div class="filter-menu">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="math">Mathematics</button>
-                <button class="filter-btn" data-filter="science">Science</button>
-                <button class="filter-btn" data-filter="english">English/Lit</button>
-            </div>
-
-            <div class="book-grid" id="library-container">
-                </div>
-        </section>
-    </main>
 
     <footer class="footer">
         <div class="box-container">

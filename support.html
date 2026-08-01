@@ -16,6 +16,13 @@
     <header class="header">
         <div class="header-1">
             <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
+            
+            <form action="" class="search-form">
+                <input type="search" placeholder="Search by title, author, or category..." id="search-box">
+                <label for="search-box" class="fas fa-search"></label>
+                <div id="search-results" class="search-results-container hidden"></div>
+            </form>
+
             <div class="icons">
                 <i class="fas fa-moon" id="theme-toggle"></i>
             </div>
@@ -37,10 +44,10 @@
                 <form action="mailto:thisissrijitbanerjee@gmail.com" method="POST">
                     <input type="text" class="input-box" placeholder="Your Name" required>
                     <input type="email" class="input-box" placeholder="Your Email" required>
-                    <select class="input-box">
+                    <select class="input-box" style="width: 100%; border: var(--border);">
                         <option>General Inquiry</option>
-                        <option>Technical Issue</option>
-                        <option>Bulk Order / Quote</option>
+                        <option>Technical Issue (e.g. PDF not loading)</option>
+                        <option>Bulk Resource Request</option>
                     </select>
                     <textarea class="input-box" placeholder="Write your message here..." rows="5" required></textarea>
                     <input type="submit" value="Send Message" class="btn" style="width: 100%;">
@@ -49,12 +56,30 @@
 
             <div style="flex: 1 1 40rem;">
                 <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: var(--green); margin-bottom: 1.5rem;"></i>
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Our Locations</h2>
-                <iframe src="https://maps.google.com/maps?q=Kolkata&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="400" style="border:0; border-radius: 1rem; box-shadow: var(--shadow);" allowfullscreen="" loading="lazy"></iframe>
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Our Hub Locations</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117925.33439927718!2d88.26495095!3d22.5354273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1689255013083!5m2!1sen!2sin" width="100%" height="400" style="border:0; border-radius: 1rem; box-shadow: var(--shadow);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
         </section>
     </main>
+
+    <div id="book-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Book Cover">
+                <div class="modal-info">
+                    <h2 id="modal-title">Book Title</h2>
+                    <p class="author-line">By <span id="modal-author"></span> &bull; <span id="modal-pages"></span> Pages</p>
+                    <p id="modal-desc" class="description"></p>
+                    <div class="modal-actions">
+                        <a href="#" id="modal-read-btn" class="btn" target="_blank"><i class="fas fa-book-reader"></i> Read Online</a>
+                        <a href="#" id="modal-download-btn" class="btn outline" download><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="box-container">

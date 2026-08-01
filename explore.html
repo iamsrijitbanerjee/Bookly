@@ -16,6 +16,13 @@
     <header class="header">
         <div class="header-1">
             <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
+            
+            <form action="" class="search-form">
+                <input type="search" placeholder="Search by title, author, or category..." id="search-box">
+                <label for="search-box" class="fas fa-search"></label>
+                <div id="search-results" class="search-results-container hidden"></div>
+            </form>
+
             <div class="icons">
                 <i class="fas fa-moon" id="theme-toggle"></i>
             </div>
@@ -35,15 +42,15 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <h3>2020: The Side Quest Begins</h3>
-                        <p>Bookly started as a small personal project to help peers find books easily.</p>
+                        <p>Bookly started as a small personal project to help peers find textbooks easily without hitting paywalls.</p>
                     </div>
                     <div class="timeline-item">
                         <h3>2022: Expanding the Library</h3>
-                        <p>Added over 15+ NCERT curriculums, reaching students across regions.</p>
+                        <p>Added over 15+ official NCERT curriculums, reaching students across multiple regions.</p>
                     </div>
                     <div class="timeline-item">
                         <h3>2024: A Modern Hub</h3>
-                        <p>Completely redesigned to offer a faster, more aesthetic learning experience.</p>
+                        <p>Completely redesigned to offer a faster, more aesthetic learning experience, featuring native PDF integration.</p>
                     </div>
                 </div>
             </div>
@@ -61,6 +68,24 @@
             </div>
         </section>
     </main>
+
+    <div id="book-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Book Cover">
+                <div class="modal-info">
+                    <h2 id="modal-title">Book Title</h2>
+                    <p class="author-line">By <span id="modal-author"></span> &bull; <span id="modal-pages"></span> Pages</p>
+                    <p id="modal-desc" class="description"></p>
+                    <div class="modal-actions">
+                        <a href="#" id="modal-read-btn" class="btn" target="_blank"><i class="fas fa-book-reader"></i> Read Online</a>
+                        <a href="#" id="modal-download-btn" class="btn outline" download><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="box-container">

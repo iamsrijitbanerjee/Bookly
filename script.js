@@ -21,20 +21,80 @@ if (themeBtn) {
     });
 }
 
-// --- JSON Database & Dynamic Rendering ---
-const libraryContainer = document.getElementById('library-container');
+// --- GLOBAL DATABASE FETCH ---
+let globalBooks = [];
+fetch('books.json')
+    .then(response => response.json())
+    .then(books => {
+        globalBooks = books;
+        
+        // Initialize Library if we are on library.html
+        const libraryContainer = document.getElementById('library-container');
+        if (libraryContainer) {
+            renderLibrary(globalBooks);
+            setupFilters(globalBooks);
+        }
+    })
+    .catch(error => console.error('Error loading the database:', error));
 
-if (libraryContainer) {
-    fetch('books.json')
-        .then(response => response.json())
-        .then(books => {
-            renderLibrary(books);
-            setupFilters(books);
-        })
-        .catch(error => console.error('Error loading the database:', error));
+// --- LIVE SEARCH ENGINE ---
+const searchBox = document.getElementById('search-box');
+const searchResults = document.getElementById('search-results');
+
+if (searchBox && searchResults) {
+    searchBox.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        
+        if (term.length < 2) {
+            searchResults.classList.add('hidden');
+            return;
+        }
+
+        // Filter by title, author, or category
+        const filtered = globalBooks.filter(book => 
+            book.title.toLowerCase().includes(term) || 
+            (book.author && book.author.toLowerCase().includes(term)) ||
+            (book.category && book.category.toLowerCase().includes(term))
+        );
+        
+        searchResults.innerHTML = ''; // Clear previous
+
+        if (filtered.length === 0) {
+            searchResults.innerHTML = '<div class="search-item"><p>No books found matching your query.</p></div>';
+        } else {
+            filtered.forEach(book => {
+                const item = document.createElement('div');
+                item.className = 'search-item';
+                item.innerHTML = `
+                    <img src="${book.img}" alt="${book.title}">
+                    <div>
+                        <h4>${book.title}</h4>
+                        <p>${book.author || 'Unknown Author'}</p>
+                    </div>
+                `;
+                // Click a search result to open modal
+                item.addEventListener('click', () => {
+                    openModal(book);
+                    searchResults.classList.add('hidden');
+                    searchBox.value = ''; // Reset input
+                });
+                searchResults.appendChild(item);
+            });
+        }
+        searchResults.classList.remove('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-form')) {
+            searchResults.classList.add('hidden');
+        }
+    });
 }
 
+// --- LIBRARY RENDERING ---
 function renderLibrary(booksData) {
+    const libraryContainer = document.getElementById('library-container');
     libraryContainer.innerHTML = ''; 
 
     booksData.forEach(book => {
@@ -50,7 +110,6 @@ function renderLibrary(booksData) {
         `;
         libraryContainer.appendChild(bookCard);
 
-        // Allow clicking either the image or the button to open the modal
         const triggers = bookCard.querySelectorAll('.trigger-modal');
         triggers.forEach(trigger => {
             trigger.addEventListener('click', () => openModal(book));
@@ -62,7 +121,6 @@ function renderLibrary(booksData) {
 
 function setupFilters(allBooks) {
     const filterBtns = document.querySelectorAll('.filter-btn');
-    
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
@@ -72,21 +130,19 @@ function setupFilters(allBooks) {
             if (filterValue === 'all') {
                 renderLibrary(allBooks);
             } else {
-                const filteredBooks = allBooks.filter(book => book.category === filterValue);
-                renderLibrary(filteredBooks);
+                renderLibrary(allBooks.filter(book => book.category === filterValue));
             }
         });
     });
 }
 
-// --- Modal & Native PDF Reader Logic ---
+// --- MODAL LOGIC ---
 const modal = document.getElementById('book-modal');
 const closeModalBtn = document.getElementById('close-modal');
 
 function openModal(book) {
     if (!modal) return;
     
-    // Inject JSON data into the modal UI
     document.getElementById('modal-img').src = book.img;
     document.getElementById('modal-title').textContent = book.title;
     document.getElementById('modal-author').textContent = book.author || "Unknown";
@@ -97,22 +153,18 @@ function openModal(book) {
     document.getElementById('modal-download-btn').href = book.fileLink;
 
     modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Lock background scroll
+    document.body.style.overflow = 'hidden'; 
 }
 
-if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
-}
-window.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal(); // Click outside to close
-});
+if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
 function closeModal() {
     modal.classList.add('hidden');
-    document.body.style.overflow = 'auto'; // Unlock scroll
+    document.body.style.overflow = 'auto'; 
 }
 
-// --- Favorites Logic ---
+// --- FAVORITES LOGIC ---
 function attachFavoriteListeners() {
     const favButtons = document.querySelectorAll('.fav-btn');
     let favorites = JSON.parse(localStorage.getItem('booklyFavs')) || [];
@@ -126,7 +178,7 @@ function attachFavoriteListeners() {
 
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            e.stopPropagation(); // Prevents opening the modal when clicking the heart
+            e.stopPropagation(); 
             
             const id = btn.getAttribute('data-id');
             if (favorites.includes(id)) {
@@ -160,23 +212,16 @@ function renderFavorites() {
             hasFavs = true;
             let clone = book.cloneNode(true);
             
-            // Re-attach listeners to the clone so it works inside the Favorites section too
             clone.querySelector('.fav-btn').addEventListener('click', (e) => {
                 e.stopPropagation();
                 book.querySelector('.fav-btn').click();
             });
             
-            // We have to re-fetch the book object from the DOM to attach the modal to the clone
             const triggers = clone.querySelectorAll('.trigger-modal');
             triggers.forEach(trigger => {
                 trigger.addEventListener('click', () => {
-                    // Quick and dirty way to re-fetch the JSON object based on ID
-                    fetch('books.json')
-                        .then(res => res.json())
-                        .then(data => {
-                            const bookData = data.find(b => b.id === id);
-                            openModal(bookData);
-                        });
+                    const bookData = globalBooks.find(b => b.id === id);
+                    if(bookData) openModal(bookData);
                 });
             });
             

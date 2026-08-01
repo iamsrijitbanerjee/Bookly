@@ -23,6 +23,13 @@
     <header class="header">
         <div class="header-1">
             <a href="index.html" class="logo"><i class="fas fa-book-open"></i> bookly</a>
+            
+            <form action="" class="search-form">
+                <input type="search" placeholder="Search by title, author, or category..." id="search-box">
+                <label for="search-box" class="fas fa-search"></label>
+                <div id="search-results" class="search-results-container hidden"></div>
+            </form>
+
             <div class="icons">
                 <i class="fas fa-moon" id="theme-toggle"></i>
                 <a href="library.html#favorites"><i class="fas fa-heart"></i></a>
@@ -67,40 +74,20 @@
         <section>
             <h2 class="heading"><span>Trending Textbooks</span></h2>
             <div class="swiper trending-slider"><div class="swiper-wrapper">
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Math+11"><h3>NCERT Math 11</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Physics+11"><h3>NCERT Physics 11</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Chem+11"><h3>NCERT Chem 11</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Bio+11"><h3>NCERT Bio 11</h3><a href="#" class="btn">Download</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Math+11"><h3>NCERT Math 11</h3><a href="library.html" class="btn outline">View in Library</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Physics+11"><h3>NCERT Physics 11</h3><a href="library.html" class="btn outline">View in Library</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Chem+11"><h3>NCERT Chem 11</h3><a href="library.html" class="btn outline">View in Library</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Bio+11"><h3>NCERT Bio 11</h3><a href="library.html" class="btn outline">View in Library</a></div>
             </div></div>
         </section>
 
         <section style="background: var(--card-bg);">
             <h2 class="heading"><span>New Arrivals</span></h2>
             <div class="swiper arrivals-slider"><div class="swiper-wrapper">
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Geo+9"><h3>Geography 9</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Hist+9"><h3>History 9</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Civics+9"><h3>Civics 9</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Econ+9"><h3>Economics 9</h3><a href="#" class="btn">Download</a></div>
-            </div></div>
-        </section>
-
-        <section>
-            <h2 class="heading"><span>Science Picks</span></h2>
-            <div class="swiper science-slider"><div class="swiper-wrapper">
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Sci+10"><h3>Science 10</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Sci+9"><h3>Science 9</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Physics+12"><h3>Physics 12</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Bio+12"><h3>Biology 12</h3><a href="#" class="btn">Download</a></div>
-            </div></div>
-        </section>
-
-        <section style="background: var(--card-bg);">
-            <h2 class="heading"><span>Fiction & Lit</span></h2>
-            <div class="swiper fiction-slider"><div class="swiper-wrapper">
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Hornbill"><h3>Hornbill</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=First+Flight"><h3>First Flight</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Beehive"><h3>Beehive</h3><a href="#" class="btn">Download</a></div>
-                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Sanskrit"><h3>Sanskrit</h3><a href="#" class="btn">Download</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Geo+9"><h3>Geography 9</h3><a href="library.html" class="btn outline">View in Library</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Hist+9"><h3>History 9</h3><a href="library.html" class="btn outline">View in Library</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Civics+9"><h3>Civics 9</h3><a href="library.html" class="btn outline">View in Library</a></div>
+                <div class="swiper-slide book-card"><img src="https://placehold.co/200x300/eee/333?text=Econ+9"><h3>Economics 9</h3><a href="library.html" class="btn outline">View in Library</a></div>
             </div></div>
         </section>
 
@@ -122,14 +109,27 @@
                     <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 1rem;">"I couldn't afford all these textbooks right away, and this site gave me exactly what I needed."</p>
                     <h3>Aisha K.</h3>
                 </div>
-                <div class="swiper-slide book-card">
-                    <i class="fas fa-quote-right" style="font-size: 3rem; color: var(--green); margin-bottom: 1rem;"></i>
-                    <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 1rem;">"Excellent aesthetic and very helpful content. 10/10 recommend to all my friends."</p>
-                    <h3>David M.</h3>
-                </div>
             </div></div>
         </section>
     </main>
+
+    <div id="book-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Book Cover">
+                <div class="modal-info">
+                    <h2 id="modal-title">Book Title</h2>
+                    <p class="author-line">By <span id="modal-author"></span> &bull; <span id="modal-pages"></span> Pages</p>
+                    <p id="modal-desc" class="description"></p>
+                    <div class="modal-actions">
+                        <a href="#" id="modal-read-btn" class="btn" target="_blank"><i class="fas fa-book-reader"></i> Read Online</a>
+                        <a href="#" id="modal-download-btn" class="btn outline" download><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="box-container">
