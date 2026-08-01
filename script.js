@@ -1,19 +1,14 @@
-// Loader Logic
 window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.querySelector('.loader-container').classList.add('hidden');
-    }, 1500); // 1.5s delay to appreciate the flipping book
+    setTimeout(() => { document.querySelector('.loader-container').classList.add('hidden'); }, 1200);
 });
 
-// Dark Mode Toggle
+// Theme Toggle
 const themeBtn = document.getElementById('theme-toggle');
 if(themeBtn) {
-    // Check local storage for theme preference
     if(localStorage.getItem('booklyTheme') === 'dark') {
         document.body.classList.add('dark-mode');
         themeBtn.classList.replace('fa-moon', 'fa-sun');
     }
-
     themeBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         if(document.body.classList.contains('dark-mode')) {
@@ -26,72 +21,81 @@ if(themeBtn) {
     });
 }
 
-// Favorites Logic (LocalStorage)
+// Favorites Logic
 const favButtons = document.querySelectorAll('.fav-btn');
 let favorites = JSON.parse(localStorage.getItem('booklyFavs')) || [];
 
-// Update hearts on page load based on saved favs
 favButtons.forEach(btn => {
     const bookId = btn.getAttribute('data-id');
     if (favorites.includes(bookId)) {
         btn.classList.add('active');
-        btn.classList.replace('far', 'fas'); // Solid heart
+        btn.classList.replace('far', 'fas'); 
     }
-
-    // Toggle favorite on click
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         const id = btn.getAttribute('data-id');
-        
         if (favorites.includes(id)) {
-            // Remove from favs
             favorites = favorites.filter(fav => fav !== id);
             btn.classList.remove('active');
             btn.classList.replace('fas', 'far');
         } else {
-            // Add to favs
             favorites.push(id);
             btn.classList.add('active');
             btn.classList.replace('far', 'fas');
         }
         localStorage.setItem('booklyFavs', JSON.stringify(favorites));
-        
-        // If we are on the library page, refresh the UI
-        if(window.location.pathname.includes('library.html')) {
-            renderFavorites();
-        }
+        if(window.location.pathname.includes('library.html')) renderFavorites();
     });
 });
 
-// Render Favorites purely on the Library page
 function renderFavorites() {
     const favContainer = document.getElementById('favorites-container');
     if(!favContainer) return;
-
     const allBooks = document.querySelectorAll('.all-books .book-card');
-    favContainer.innerHTML = ''; // Clear current
+    favContainer.innerHTML = ''; 
     let hasFavs = false;
 
     allBooks.forEach(book => {
         const id = book.querySelector('.fav-btn').getAttribute('data-id');
         if(favorites.includes(id)) {
             hasFavs = true;
-            // Clone the book card for the favorites section
             let clone = book.cloneNode(true);
-            // Re-attach listener to the cloned button
-            clone.querySelector('.fav-btn').addEventListener('click', () => {
-                book.querySelector('.fav-btn').click(); // trigger original
-            });
+            clone.querySelector('.fav-btn').addEventListener('click', () => book.querySelector('.fav-btn').click());
             favContainer.appendChild(clone);
         }
     });
+    if(!hasFavs) favContainer.innerHTML = '<p style="font-size:1.6rem; color:var(--text-light);">Click the heart icon on any book to add it here!</p>';
+}
+if(document.getElementById('favorites-container')) renderFavorites();
 
-    if(!hasFavs) {
-        favContainer.innerHTML = '<p style="font-size:1.6rem; color:var(--text-light);">You have not favorited any books yet. Click the heart icon to add them here!</p>';
-    }
+// Swiper Sliders
+if(typeof Swiper !== 'undefined') {
+    const sliderSettings = { loop: true, spaceBetween: 20, autoplay: { delay: 3500, disableOnInteraction: false }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } } };
+    
+    new Swiper(".hero-slider", { loop: true, centeredSlides: true, autoplay: { delay: 2500 }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } } });
+    new Swiper(".trending-slider", sliderSettings);
+    new Swiper(".arrivals-slider", sliderSettings);
+    new Swiper(".science-slider", sliderSettings);
+    new Swiper(".fiction-slider", sliderSettings);
+    new Swiper(".reviews-slider", { loop: true, spaceBetween: 20, autoplay: { delay: 4000 }, breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } } });
 }
 
-// Call on load if library page
-if(document.getElementById('favorites-container')) {
-    renderFavorites();
-}
+// Library Filtering
+const filterBtns = document.querySelectorAll('.filter-btn');
+const filterItems = document.querySelectorAll('.filter-item');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        let filterValue = btn.getAttribute('data-filter');
+        filterItems.forEach(item => {
+            if(filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});

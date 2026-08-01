@@ -9,7 +9,9 @@
 </head>
 <body>
 
-    <div class="loader-container"><div class="flipping-book"></div></div>
+    <div class="loader-container">
+        <div class="book-loader"><div class="cover left"></div><div class="page"></div><div class="page"></div><div class="page"></div><div class="cover right"></div></div>
+    </div>
 
     <header class="header">
         <div class="header-1">
@@ -28,35 +30,50 @@
 
     <main>
         <section>
-            <h2 class="heading"><span>Beyond Bookly</span></h2>
-            <p style="text-align: center; font-size: 1.6rem; margin-bottom: 4rem;">Check out these other highly recommended free resources to aid your studies.</p>
-            
-            <div class="book-grid">
-                <div class="book-card" style="padding: 4rem 2rem;">
-                    <i class="fas fa-globe" style="font-size: 5rem; color: var(--green); margin-bottom: 2rem;"></i>
-                    <h3>Official NCERT Portal</h3>
-                    <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 2rem;">Direct access to government curriculums.</p>
-                    <a href="https://ncert.nic.in/" target="_blank" class="btn">Visit Site</a>
+            <h2 class="heading"><span>Our Journey</span></h2>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>2020: The Side Quest Begins</h3>
+                        <p>Bookly started as a small personal project to help peers find books easily.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>2022: Expanding the Library</h3>
+                        <p>Added over 15+ NCERT curriculums, reaching students across regions.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>2024: A Modern Hub</h3>
+                        <p>Completely redesigned to offer a faster, more aesthetic learning experience.</p>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="book-card" style="padding: 4rem 2rem;">
-                    <i class="fas fa-laptop-code" style="font-size: 5rem; color: var(--green); margin-bottom: 2rem;"></i>
-                    <h3>Khan Academy</h3>
-                    <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 2rem;">Free video tutorials and interactive lessons.</p>
-                    <a href="https://www.khanacademy.org/" target="_blank" class="btn">Visit Site</a>
-                </div>
-
-                <div class="book-card" style="padding: 4rem 2rem;">
-                    <i class="fas fa-university" style="font-size: 5rem; color: var(--green); margin-bottom: 2rem;"></i>
-                    <h3>Project Gutenberg</h3>
-                    <p style="font-size: 1.4rem; color: var(--text-light); margin-bottom: 2rem;">Library of over 70,000 free classic eBooks.</p>
-                    <a href="https://www.gutenberg.org/" target="_blank" class="btn">Visit Site</a>
-                </div>
+        <section style="background: var(--card-bg);">
+            <h2 class="heading"><span>Suggest a Book</span></h2>
+            <div style="max-width: 500px; margin: 0 auto; text-align: center;">
+                <i class="fas fa-lightbulb" style="font-size: 5rem; color: #f1c40f; margin-bottom: 2rem;"></i>
+                <p style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 2rem;">Can't find what you're looking for? Let us know!</p>
+                <form action="#">
+                    <input type="text" class="input-box" placeholder="Book Title & Author" required>
+                    <input type="submit" value="Submit Suggestion" class="btn" style="width: 100%;">
+                </form>
             </div>
         </section>
     </main>
 
     <footer class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Bookly</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Stardance"><i class="fas fa-star"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
         <div class="credit">Created by Srijit Banerjee | All Rights Reserved</div>
     </footer>
 

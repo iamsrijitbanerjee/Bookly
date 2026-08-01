@@ -9,7 +9,9 @@
 </head>
 <body>
 
-    <div class="loader-container"><div class="flipping-book"></div></div>
+    <div class="loader-container">
+        <div class="book-loader"><div class="cover left"></div><div class="page"></div><div class="page"></div><div class="page"></div><div class="cover right"></div></div>
+    </div>
 
     <header class="header">
         <div class="header-1">
@@ -30,25 +32,42 @@
         <section style="display: flex; flex-wrap: wrap; gap: 3rem;">
             
             <div style="flex: 1 1 40rem; background: var(--card-bg); padding: 4rem; border-radius: 1rem; border: var(--border);">
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Get in Touch</h2>
+                <i class="fas fa-headset" style="font-size: 4rem; color: var(--green); margin-bottom: 1.5rem;"></i>
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Get a Quote / Support</h2>
                 <form action="mailto:thisissrijitbanerjee@gmail.com" method="POST">
-                    <input type="text" placeholder="Your Name" required style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); font-size: 1.5rem;">
-                    <input type="email" placeholder="Your Email" required style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); font-size: 1.5rem;">
-                    <textarea placeholder="How can we help? Request a book here..." rows="5" required style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; border: var(--border); border-radius: .5rem; background: var(--bg-color); color: var(--text-main); font-size: 1.5rem;"></textarea>
+                    <input type="text" class="input-box" placeholder="Your Name" required>
+                    <input type="email" class="input-box" placeholder="Your Email" required>
+                    <select class="input-box">
+                        <option>General Inquiry</option>
+                        <option>Technical Issue</option>
+                        <option>Bulk Order / Quote</option>
+                    </select>
+                    <textarea class="input-box" placeholder="Write your message here..." rows="5" required></textarea>
                     <input type="submit" value="Send Message" class="btn" style="width: 100%;">
                 </form>
             </div>
 
             <div style="flex: 1 1 40rem;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Our Headquarters</h2>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117925.33439927702!2d87.234398!3d23.547146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7710b42a8b98b%3A0x6bd34a3625fb18b!2sDurgapur%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" 
-                width="100%" height="400" style="border:0; border-radius: 1rem;" allowfullscreen="" loading="lazy"></iframe>
+                <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: var(--green); margin-bottom: 1.5rem;"></i>
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Our Locations</h2>
+                <iframe src="https://maps.google.com/maps?q=Kolkata&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="400" style="border:0; border-radius: 1rem; box-shadow: var(--shadow);" allowfullscreen="" loading="lazy"></iframe>
             </div>
 
         </section>
     </main>
 
     <footer class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Bookly</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Stardance"><i class="fas fa-star"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
         <div class="credit">Created by Srijit Banerjee | All Rights Reserved</div>
     </footer>
 
